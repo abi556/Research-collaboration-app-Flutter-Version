@@ -48,8 +48,7 @@ Welcome to the **Research Collaboration App**! This platform streamlines researc
   - **Admin:** Manages users and projects.
   - **Professor:** Creates and manages projects.
   - **Student:** Views and applies for research projects.
->>>>>>> c8eb4e00ae458fc96de5c9a461e0e1ed8ed35dac
-
+>>>>>>> 
 ---
 
 ## 👥 <span style="color:#1976D2">Group Members</span>
