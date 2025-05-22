@@ -1,4 +1,3 @@
-
 # 🎓✨ <span style="color:#1976D2">Research-collaboration-app-Flutter-Version</span> ✨🎓
 
 Welcome to the **Research Collaboration App**! This platform streamlines research project management and collaboration between Professors, Students, and Admins.
@@ -40,15 +39,10 @@ Welcome to the **Research Collaboration App**! This platform streamlines researc
 ### 4️⃣ 🔐 <span style="color:#C62828">Authentication & Authorization</span>
 - **Signup/Login/Logout:** Users can create accounts and access the system.
 - **Role-Based Access:**
-<<<<<<< HEAD
-    - **Admin:** Manages users and projects.
-    - **Professor:** Creates and manages projects.
-    - **Student:** Views and applies for research projects.
-=======
   - **Admin:** Manages users and projects.
   - **Professor:** Creates and manages projects.
   - **Student:** Views and applies for research projects.
->>>>>>> 
+
 ---
 
 ## 👥 <span style="color:#1976D2">Group Members</span>
