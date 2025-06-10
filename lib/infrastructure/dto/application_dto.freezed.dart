@@ -12,8 +12,7 @@ part of 'application_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ApplicationDto _$ApplicationDtoFromJson(Map<String, dynamic> json) {
   return _ApplicationDto.fromJson(json);
@@ -39,9 +38,8 @@ mixin _$ApplicationDto {
 /// @nodoc
 abstract class $ApplicationDtoCopyWith<$Res> {
   factory $ApplicationDtoCopyWith(
-    ApplicationDto value,
-    $Res Function(ApplicationDto) then,
-  ) = _$ApplicationDtoCopyWithImpl<$Res, ApplicationDto>;
+          ApplicationDto value, $Res Function(ApplicationDto) then) =
+      _$ApplicationDtoCopyWithImpl<$Res, ApplicationDto>;
   @useResult
   $Res call({int id, int studentId, int projectId, ApplicationStatus status});
 }
@@ -66,41 +64,33 @@ class _$ApplicationDtoCopyWithImpl<$Res, $Val extends ApplicationDto>
     Object? projectId = null,
     Object? status = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as int,
-            studentId:
-                null == studentId
-                    ? _value.studentId
-                    : studentId // ignore: cast_nullable_to_non_nullable
-                        as int,
-            projectId:
-                null == projectId
-                    ? _value.projectId
-                    : projectId // ignore: cast_nullable_to_non_nullable
-                        as int,
-            status:
-                null == status
-                    ? _value.status
-                    : status // ignore: cast_nullable_to_non_nullable
-                        as ApplicationStatus,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      studentId: null == studentId
+          ? _value.studentId
+          : studentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      projectId: null == projectId
+          ? _value.projectId
+          : projectId // ignore: cast_nullable_to_non_nullable
+              as int,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as ApplicationStatus,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$ApplicationDtoImplCopyWith<$Res>
     implements $ApplicationDtoCopyWith<$Res> {
-  factory _$$ApplicationDtoImplCopyWith(
-    _$ApplicationDtoImpl value,
-    $Res Function(_$ApplicationDtoImpl) then,
-  ) = __$$ApplicationDtoImplCopyWithImpl<$Res>;
+  factory _$$ApplicationDtoImplCopyWith(_$ApplicationDtoImpl value,
+          $Res Function(_$ApplicationDtoImpl) then) =
+      __$$ApplicationDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int id, int studentId, int projectId, ApplicationStatus status});
@@ -111,9 +101,8 @@ class __$$ApplicationDtoImplCopyWithImpl<$Res>
     extends _$ApplicationDtoCopyWithImpl<$Res, _$ApplicationDtoImpl>
     implements _$$ApplicationDtoImplCopyWith<$Res> {
   __$$ApplicationDtoImplCopyWithImpl(
-    _$ApplicationDtoImpl _value,
-    $Res Function(_$ApplicationDtoImpl) _then,
-  ) : super(_value, _then);
+      _$ApplicationDtoImpl _value, $Res Function(_$ApplicationDtoImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ApplicationDto
   /// with the given fields replaced by the non-null parameter values.
@@ -125,42 +114,35 @@ class __$$ApplicationDtoImplCopyWithImpl<$Res>
     Object? projectId = null,
     Object? status = null,
   }) {
-    return _then(
-      _$ApplicationDtoImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as int,
-        studentId:
-            null == studentId
-                ? _value.studentId
-                : studentId // ignore: cast_nullable_to_non_nullable
-                    as int,
-        projectId:
-            null == projectId
-                ? _value.projectId
-                : projectId // ignore: cast_nullable_to_non_nullable
-                    as int,
-        status:
-            null == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                    as ApplicationStatus,
-      ),
-    );
+    return _then(_$ApplicationDtoImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      studentId: null == studentId
+          ? _value.studentId
+          : studentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      projectId: null == projectId
+          ? _value.projectId
+          : projectId // ignore: cast_nullable_to_non_nullable
+              as int,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as ApplicationStatus,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ApplicationDtoImpl implements _ApplicationDto {
-  const _$ApplicationDtoImpl({
-    required this.id,
-    required this.studentId,
-    required this.projectId,
-    required this.status,
-  });
+  const _$ApplicationDtoImpl(
+      {required this.id,
+      required this.studentId,
+      required this.projectId,
+      required this.status});
 
   factory _$ApplicationDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$ApplicationDtoImplFromJson(json);
@@ -204,23 +186,22 @@ class _$ApplicationDtoImpl implements _ApplicationDto {
   @pragma('vm:prefer-inline')
   _$$ApplicationDtoImplCopyWith<_$ApplicationDtoImpl> get copyWith =>
       __$$ApplicationDtoImplCopyWithImpl<_$ApplicationDtoImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ApplicationDtoImplToJson(this);
+    return _$$ApplicationDtoImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ApplicationDto implements ApplicationDto {
-  const factory _ApplicationDto({
-    required final int id,
-    required final int studentId,
-    required final int projectId,
-    required final ApplicationStatus status,
-  }) = _$ApplicationDtoImpl;
+  const factory _ApplicationDto(
+      {required final int id,
+      required final int studentId,
+      required final int projectId,
+      required final ApplicationStatus status}) = _$ApplicationDtoImpl;
 
   factory _ApplicationDto.fromJson(Map<String, dynamic> json) =
       _$ApplicationDtoImpl.fromJson;

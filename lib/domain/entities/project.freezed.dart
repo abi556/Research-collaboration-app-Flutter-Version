@@ -12,8 +12,7 @@ part of 'project.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Project _$ProjectFromJson(Map<String, dynamic> json) {
   return _Project.fromJson(json);
@@ -43,15 +42,14 @@ abstract class $ProjectCopyWith<$Res> {
   factory $ProjectCopyWith(Project value, $Res Function(Project) then) =
       _$ProjectCopyWithImpl<$Res, Project>;
   @useResult
-  $Res call({
-    int id,
-    String title,
-    String description,
-    List<String> requirements,
-    String startDate,
-    String endDate,
-    String deadline,
-  });
+  $Res call(
+      {int id,
+      String title,
+      String description,
+      List<String> requirements,
+      String startDate,
+      String endDate,
+      String deadline});
 }
 
 /// @nodoc
@@ -77,66 +75,54 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
     Object? endDate = null,
     Object? deadline = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as int,
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as String,
-            description:
-                null == description
-                    ? _value.description
-                    : description // ignore: cast_nullable_to_non_nullable
-                        as String,
-            requirements:
-                null == requirements
-                    ? _value.requirements
-                    : requirements // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            startDate:
-                null == startDate
-                    ? _value.startDate
-                    : startDate // ignore: cast_nullable_to_non_nullable
-                        as String,
-            endDate:
-                null == endDate
-                    ? _value.endDate
-                    : endDate // ignore: cast_nullable_to_non_nullable
-                        as String,
-            deadline:
-                null == deadline
-                    ? _value.deadline
-                    : deadline // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      requirements: null == requirements
+          ? _value.requirements
+          : requirements // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      endDate: null == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      deadline: null == deadline
+          ? _value.deadline
+          : deadline // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$ProjectImplCopyWith<$Res> implements $ProjectCopyWith<$Res> {
   factory _$$ProjectImplCopyWith(
-    _$ProjectImpl value,
-    $Res Function(_$ProjectImpl) then,
-  ) = __$$ProjectImplCopyWithImpl<$Res>;
+          _$ProjectImpl value, $Res Function(_$ProjectImpl) then) =
+      __$$ProjectImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    int id,
-    String title,
-    String description,
-    List<String> requirements,
-    String startDate,
-    String endDate,
-    String deadline,
-  });
+  $Res call(
+      {int id,
+      String title,
+      String description,
+      List<String> requirements,
+      String startDate,
+      String endDate,
+      String deadline});
 }
 
 /// @nodoc
@@ -144,9 +130,8 @@ class __$$ProjectImplCopyWithImpl<$Res>
     extends _$ProjectCopyWithImpl<$Res, _$ProjectImpl>
     implements _$$ProjectImplCopyWith<$Res> {
   __$$ProjectImplCopyWithImpl(
-    _$ProjectImpl _value,
-    $Res Function(_$ProjectImpl) _then,
-  ) : super(_value, _then);
+      _$ProjectImpl _value, $Res Function(_$ProjectImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of Project
   /// with the given fields replaced by the non-null parameter values.
@@ -161,60 +146,51 @@ class __$$ProjectImplCopyWithImpl<$Res>
     Object? endDate = null,
     Object? deadline = null,
   }) {
-    return _then(
-      _$ProjectImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as int,
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as String,
-        description:
-            null == description
-                ? _value.description
-                : description // ignore: cast_nullable_to_non_nullable
-                    as String,
-        requirements:
-            null == requirements
-                ? _value._requirements
-                : requirements // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        startDate:
-            null == startDate
-                ? _value.startDate
-                : startDate // ignore: cast_nullable_to_non_nullable
-                    as String,
-        endDate:
-            null == endDate
-                ? _value.endDate
-                : endDate // ignore: cast_nullable_to_non_nullable
-                    as String,
-        deadline:
-            null == deadline
-                ? _value.deadline
-                : deadline // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+    return _then(_$ProjectImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      requirements: null == requirements
+          ? _value._requirements
+          : requirements // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      endDate: null == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      deadline: null == deadline
+          ? _value.deadline
+          : deadline // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ProjectImpl implements _Project {
-  const _$ProjectImpl({
-    required this.id,
-    required this.title,
-    required this.description,
-    required final List<String> requirements,
-    required this.startDate,
-    required this.endDate,
-    required this.deadline,
-  }) : _requirements = requirements;
+  const _$ProjectImpl(
+      {required this.id,
+      required this.title,
+      required this.description,
+      required final List<String> requirements,
+      required this.startDate,
+      required this.endDate,
+      required this.deadline})
+      : _requirements = requirements;
 
   factory _$ProjectImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProjectImplFromJson(json);
@@ -254,10 +230,8 @@ class _$ProjectImpl implements _Project {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            const DeepCollectionEquality().equals(
-              other._requirements,
-              _requirements,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._requirements, _requirements) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
@@ -268,15 +242,14 @@ class _$ProjectImpl implements _Project {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    title,
-    description,
-    const DeepCollectionEquality().hash(_requirements),
-    startDate,
-    endDate,
-    deadline,
-  );
+      runtimeType,
+      id,
+      title,
+      description,
+      const DeepCollectionEquality().hash(_requirements),
+      startDate,
+      endDate,
+      deadline);
 
   /// Create a copy of Project
   /// with the given fields replaced by the non-null parameter values.
@@ -288,20 +261,21 @@ class _$ProjectImpl implements _Project {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ProjectImplToJson(this);
+    return _$$ProjectImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _Project implements Project {
-  const factory _Project({
-    required final int id,
-    required final String title,
-    required final String description,
-    required final List<String> requirements,
-    required final String startDate,
-    required final String endDate,
-    required final String deadline,
-  }) = _$ProjectImpl;
+  const factory _Project(
+      {required final int id,
+      required final String title,
+      required final String description,
+      required final List<String> requirements,
+      required final String startDate,
+      required final String endDate,
+      required final String deadline}) = _$ProjectImpl;
 
   factory _Project.fromJson(Map<String, dynamic> json) = _$ProjectImpl.fromJson;
 

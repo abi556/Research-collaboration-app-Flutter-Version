@@ -12,8 +12,7 @@ part of 'project_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ProjectDto _$ProjectDtoFromJson(Map<String, dynamic> json) {
   return _ProjectDto.fromJson(json);
@@ -42,19 +41,17 @@ mixin _$ProjectDto {
 /// @nodoc
 abstract class $ProjectDtoCopyWith<$Res> {
   factory $ProjectDtoCopyWith(
-    ProjectDto value,
-    $Res Function(ProjectDto) then,
-  ) = _$ProjectDtoCopyWithImpl<$Res, ProjectDto>;
+          ProjectDto value, $Res Function(ProjectDto) then) =
+      _$ProjectDtoCopyWithImpl<$Res, ProjectDto>;
   @useResult
-  $Res call({
-    int id,
-    String title,
-    String description,
-    List<String> requirements,
-    String startDate,
-    String endDate,
-    String deadline,
-  });
+  $Res call(
+      {int id,
+      String title,
+      String description,
+      List<String> requirements,
+      String startDate,
+      String endDate,
+      String deadline});
 }
 
 /// @nodoc
@@ -80,46 +77,36 @@ class _$ProjectDtoCopyWithImpl<$Res, $Val extends ProjectDto>
     Object? endDate = null,
     Object? deadline = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as int,
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as String,
-            description:
-                null == description
-                    ? _value.description
-                    : description // ignore: cast_nullable_to_non_nullable
-                        as String,
-            requirements:
-                null == requirements
-                    ? _value.requirements
-                    : requirements // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            startDate:
-                null == startDate
-                    ? _value.startDate
-                    : startDate // ignore: cast_nullable_to_non_nullable
-                        as String,
-            endDate:
-                null == endDate
-                    ? _value.endDate
-                    : endDate // ignore: cast_nullable_to_non_nullable
-                        as String,
-            deadline:
-                null == deadline
-                    ? _value.deadline
-                    : deadline // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      requirements: null == requirements
+          ? _value.requirements
+          : requirements // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      endDate: null == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      deadline: null == deadline
+          ? _value.deadline
+          : deadline // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
@@ -127,20 +114,18 @@ class _$ProjectDtoCopyWithImpl<$Res, $Val extends ProjectDto>
 abstract class _$$ProjectDtoImplCopyWith<$Res>
     implements $ProjectDtoCopyWith<$Res> {
   factory _$$ProjectDtoImplCopyWith(
-    _$ProjectDtoImpl value,
-    $Res Function(_$ProjectDtoImpl) then,
-  ) = __$$ProjectDtoImplCopyWithImpl<$Res>;
+          _$ProjectDtoImpl value, $Res Function(_$ProjectDtoImpl) then) =
+      __$$ProjectDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    int id,
-    String title,
-    String description,
-    List<String> requirements,
-    String startDate,
-    String endDate,
-    String deadline,
-  });
+  $Res call(
+      {int id,
+      String title,
+      String description,
+      List<String> requirements,
+      String startDate,
+      String endDate,
+      String deadline});
 }
 
 /// @nodoc
@@ -148,9 +133,8 @@ class __$$ProjectDtoImplCopyWithImpl<$Res>
     extends _$ProjectDtoCopyWithImpl<$Res, _$ProjectDtoImpl>
     implements _$$ProjectDtoImplCopyWith<$Res> {
   __$$ProjectDtoImplCopyWithImpl(
-    _$ProjectDtoImpl _value,
-    $Res Function(_$ProjectDtoImpl) _then,
-  ) : super(_value, _then);
+      _$ProjectDtoImpl _value, $Res Function(_$ProjectDtoImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ProjectDto
   /// with the given fields replaced by the non-null parameter values.
@@ -165,60 +149,51 @@ class __$$ProjectDtoImplCopyWithImpl<$Res>
     Object? endDate = null,
     Object? deadline = null,
   }) {
-    return _then(
-      _$ProjectDtoImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as int,
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as String,
-        description:
-            null == description
-                ? _value.description
-                : description // ignore: cast_nullable_to_non_nullable
-                    as String,
-        requirements:
-            null == requirements
-                ? _value._requirements
-                : requirements // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        startDate:
-            null == startDate
-                ? _value.startDate
-                : startDate // ignore: cast_nullable_to_non_nullable
-                    as String,
-        endDate:
-            null == endDate
-                ? _value.endDate
-                : endDate // ignore: cast_nullable_to_non_nullable
-                    as String,
-        deadline:
-            null == deadline
-                ? _value.deadline
-                : deadline // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+    return _then(_$ProjectDtoImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      requirements: null == requirements
+          ? _value._requirements
+          : requirements // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      endDate: null == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      deadline: null == deadline
+          ? _value.deadline
+          : deadline // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ProjectDtoImpl implements _ProjectDto {
-  const _$ProjectDtoImpl({
-    required this.id,
-    required this.title,
-    required this.description,
-    required final List<String> requirements,
-    required this.startDate,
-    required this.endDate,
-    required this.deadline,
-  }) : _requirements = requirements;
+  const _$ProjectDtoImpl(
+      {required this.id,
+      required this.title,
+      required this.description,
+      required final List<String> requirements,
+      required this.startDate,
+      required this.endDate,
+      required this.deadline})
+      : _requirements = requirements;
 
   factory _$ProjectDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProjectDtoImplFromJson(json);
@@ -258,10 +233,8 @@ class _$ProjectDtoImpl implements _ProjectDto {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            const DeepCollectionEquality().equals(
-              other._requirements,
-              _requirements,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._requirements, _requirements) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
@@ -272,15 +245,14 @@ class _$ProjectDtoImpl implements _ProjectDto {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    title,
-    description,
-    const DeepCollectionEquality().hash(_requirements),
-    startDate,
-    endDate,
-    deadline,
-  );
+      runtimeType,
+      id,
+      title,
+      description,
+      const DeepCollectionEquality().hash(_requirements),
+      startDate,
+      endDate,
+      deadline);
 
   /// Create a copy of ProjectDto
   /// with the given fields replaced by the non-null parameter values.
@@ -292,20 +264,21 @@ class _$ProjectDtoImpl implements _ProjectDto {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ProjectDtoImplToJson(this);
+    return _$$ProjectDtoImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ProjectDto implements ProjectDto {
-  const factory _ProjectDto({
-    required final int id,
-    required final String title,
-    required final String description,
-    required final List<String> requirements,
-    required final String startDate,
-    required final String endDate,
-    required final String deadline,
-  }) = _$ProjectDtoImpl;
+  const factory _ProjectDto(
+      {required final int id,
+      required final String title,
+      required final String description,
+      required final List<String> requirements,
+      required final String startDate,
+      required final String endDate,
+      required final String deadline}) = _$ProjectDtoImpl;
 
   factory _ProjectDto.fromJson(Map<String, dynamic> json) =
       _$ProjectDtoImpl.fromJson;

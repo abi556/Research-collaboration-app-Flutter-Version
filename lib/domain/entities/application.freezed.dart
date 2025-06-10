@@ -12,8 +12,7 @@ part of 'application.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Application _$ApplicationFromJson(Map<String, dynamic> json) {
   return _Application.fromJson(json);
@@ -39,9 +38,8 @@ mixin _$Application {
 /// @nodoc
 abstract class $ApplicationCopyWith<$Res> {
   factory $ApplicationCopyWith(
-    Application value,
-    $Res Function(Application) then,
-  ) = _$ApplicationCopyWithImpl<$Res, Application>;
+          Application value, $Res Function(Application) then) =
+      _$ApplicationCopyWithImpl<$Res, Application>;
   @useResult
   $Res call({int id, int studentId, int projectId, ApplicationStatus status});
 }
@@ -66,31 +64,24 @@ class _$ApplicationCopyWithImpl<$Res, $Val extends Application>
     Object? projectId = null,
     Object? status = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as int,
-            studentId:
-                null == studentId
-                    ? _value.studentId
-                    : studentId // ignore: cast_nullable_to_non_nullable
-                        as int,
-            projectId:
-                null == projectId
-                    ? _value.projectId
-                    : projectId // ignore: cast_nullable_to_non_nullable
-                        as int,
-            status:
-                null == status
-                    ? _value.status
-                    : status // ignore: cast_nullable_to_non_nullable
-                        as ApplicationStatus,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      studentId: null == studentId
+          ? _value.studentId
+          : studentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      projectId: null == projectId
+          ? _value.projectId
+          : projectId // ignore: cast_nullable_to_non_nullable
+              as int,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as ApplicationStatus,
+    ) as $Val);
   }
 }
 
@@ -98,9 +89,8 @@ class _$ApplicationCopyWithImpl<$Res, $Val extends Application>
 abstract class _$$ApplicationImplCopyWith<$Res>
     implements $ApplicationCopyWith<$Res> {
   factory _$$ApplicationImplCopyWith(
-    _$ApplicationImpl value,
-    $Res Function(_$ApplicationImpl) then,
-  ) = __$$ApplicationImplCopyWithImpl<$Res>;
+          _$ApplicationImpl value, $Res Function(_$ApplicationImpl) then) =
+      __$$ApplicationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int id, int studentId, int projectId, ApplicationStatus status});
@@ -111,9 +101,8 @@ class __$$ApplicationImplCopyWithImpl<$Res>
     extends _$ApplicationCopyWithImpl<$Res, _$ApplicationImpl>
     implements _$$ApplicationImplCopyWith<$Res> {
   __$$ApplicationImplCopyWithImpl(
-    _$ApplicationImpl _value,
-    $Res Function(_$ApplicationImpl) _then,
-  ) : super(_value, _then);
+      _$ApplicationImpl _value, $Res Function(_$ApplicationImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of Application
   /// with the given fields replaced by the non-null parameter values.
@@ -125,42 +114,35 @@ class __$$ApplicationImplCopyWithImpl<$Res>
     Object? projectId = null,
     Object? status = null,
   }) {
-    return _then(
-      _$ApplicationImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as int,
-        studentId:
-            null == studentId
-                ? _value.studentId
-                : studentId // ignore: cast_nullable_to_non_nullable
-                    as int,
-        projectId:
-            null == projectId
-                ? _value.projectId
-                : projectId // ignore: cast_nullable_to_non_nullable
-                    as int,
-        status:
-            null == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                    as ApplicationStatus,
-      ),
-    );
+    return _then(_$ApplicationImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      studentId: null == studentId
+          ? _value.studentId
+          : studentId // ignore: cast_nullable_to_non_nullable
+              as int,
+      projectId: null == projectId
+          ? _value.projectId
+          : projectId // ignore: cast_nullable_to_non_nullable
+              as int,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as ApplicationStatus,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ApplicationImpl implements _Application {
-  const _$ApplicationImpl({
-    required this.id,
-    required this.studentId,
-    required this.projectId,
-    required this.status,
-  });
+  const _$ApplicationImpl(
+      {required this.id,
+      required this.studentId,
+      required this.projectId,
+      required this.status});
 
   factory _$ApplicationImpl.fromJson(Map<String, dynamic> json) =>
       _$$ApplicationImplFromJson(json);
@@ -207,17 +189,18 @@ class _$ApplicationImpl implements _Application {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ApplicationImplToJson(this);
+    return _$$ApplicationImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _Application implements Application {
-  const factory _Application({
-    required final int id,
-    required final int studentId,
-    required final int projectId,
-    required final ApplicationStatus status,
-  }) = _$ApplicationImpl;
+  const factory _Application(
+      {required final int id,
+      required final int studentId,
+      required final int projectId,
+      required final ApplicationStatus status}) = _$ApplicationImpl;
 
   factory _Application.fromJson(Map<String, dynamic> json) =
       _$ApplicationImpl.fromJson;

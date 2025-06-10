@@ -12,8 +12,7 @@ part of 'user.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 User _$UserFromJson(Map<String, dynamic> json) {
   return _User.fromJson(json);
@@ -45,17 +44,16 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({
-    int id,
-    String email,
-    String? name,
-    String? department,
-    String? bio,
-    Role? role,
-    List<String>? skills,
-    String? researchInterests,
-    bool? isActive,
-  });
+  $Res call(
+      {int id,
+      String email,
+      String? name,
+      String? department,
+      String? bio,
+      Role? role,
+      List<String>? skills,
+      String? researchInterests,
+      bool? isActive});
 }
 
 /// @nodoc
@@ -83,78 +81,64 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? researchInterests = freezed,
     Object? isActive = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as int,
-            email:
-                null == email
-                    ? _value.email
-                    : email // ignore: cast_nullable_to_non_nullable
-                        as String,
-            name:
-                freezed == name
-                    ? _value.name
-                    : name // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            department:
-                freezed == department
-                    ? _value.department
-                    : department // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            bio:
-                freezed == bio
-                    ? _value.bio
-                    : bio // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            role:
-                freezed == role
-                    ? _value.role
-                    : role // ignore: cast_nullable_to_non_nullable
-                        as Role?,
-            skills:
-                freezed == skills
-                    ? _value.skills
-                    : skills // ignore: cast_nullable_to_non_nullable
-                        as List<String>?,
-            researchInterests:
-                freezed == researchInterests
-                    ? _value.researchInterests
-                    : researchInterests // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            isActive:
-                freezed == isActive
-                    ? _value.isActive
-                    : isActive // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      department: freezed == department
+          ? _value.department
+          : department // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bio: freezed == bio
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
+              as String?,
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as Role?,
+      skills: freezed == skills
+          ? _value.skills
+          : skills // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      researchInterests: freezed == researchInterests
+          ? _value.researchInterests
+          : researchInterests // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isActive: freezed == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$$UserImplCopyWith(
-    _$UserImpl value,
-    $Res Function(_$UserImpl) then,
-  ) = __$$UserImplCopyWithImpl<$Res>;
+          _$UserImpl value, $Res Function(_$UserImpl) then) =
+      __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    int id,
-    String email,
-    String? name,
-    String? department,
-    String? bio,
-    Role? role,
-    List<String>? skills,
-    String? researchInterests,
-    bool? isActive,
-  });
+  $Res call(
+      {int id,
+      String email,
+      String? name,
+      String? department,
+      String? bio,
+      Role? role,
+      List<String>? skills,
+      String? researchInterests,
+      bool? isActive});
 }
 
 /// @nodoc
@@ -162,7 +146,7 @@ class __$$UserImplCopyWithImpl<$Res>
     extends _$UserCopyWithImpl<$Res, _$UserImpl>
     implements _$$UserImplCopyWith<$Res> {
   __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
-    : super(_value, _then);
+      : super(_value, _then);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -179,72 +163,61 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? researchInterests = freezed,
     Object? isActive = freezed,
   }) {
-    return _then(
-      _$UserImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as int,
-        email:
-            null == email
-                ? _value.email
-                : email // ignore: cast_nullable_to_non_nullable
-                    as String,
-        name:
-            freezed == name
-                ? _value.name
-                : name // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        department:
-            freezed == department
-                ? _value.department
-                : department // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        bio:
-            freezed == bio
-                ? _value.bio
-                : bio // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        role:
-            freezed == role
-                ? _value.role
-                : role // ignore: cast_nullable_to_non_nullable
-                    as Role?,
-        skills:
-            freezed == skills
-                ? _value._skills
-                : skills // ignore: cast_nullable_to_non_nullable
-                    as List<String>?,
-        researchInterests:
-            freezed == researchInterests
-                ? _value.researchInterests
-                : researchInterests // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        isActive:
-            freezed == isActive
-                ? _value.isActive
-                : isActive // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-      ),
-    );
+    return _then(_$UserImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      department: freezed == department
+          ? _value.department
+          : department // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bio: freezed == bio
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
+              as String?,
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as Role?,
+      skills: freezed == skills
+          ? _value._skills
+          : skills // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      researchInterests: freezed == researchInterests
+          ? _value.researchInterests
+          : researchInterests // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isActive: freezed == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UserImpl implements _User {
-  const _$UserImpl({
-    required this.id,
-    required this.email,
-    this.name,
-    this.department,
-    this.bio,
-    this.role,
-    final List<String>? skills,
-    this.researchInterests,
-    this.isActive,
-  }) : _skills = skills;
+  const _$UserImpl(
+      {required this.id,
+      required this.email,
+      this.name,
+      this.department,
+      this.bio,
+      this.role,
+      final List<String>? skills,
+      this.researchInterests,
+      this.isActive})
+      : _skills = skills;
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -303,17 +276,16 @@ class _$UserImpl implements _User {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    email,
-    name,
-    department,
-    bio,
-    role,
-    const DeepCollectionEquality().hash(_skills),
-    researchInterests,
-    isActive,
-  );
+      runtimeType,
+      id,
+      email,
+      name,
+      department,
+      bio,
+      role,
+      const DeepCollectionEquality().hash(_skills),
+      researchInterests,
+      isActive);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -325,22 +297,23 @@ class _$UserImpl implements _User {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserImplToJson(this);
+    return _$$UserImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _User implements User {
-  const factory _User({
-    required final int id,
-    required final String email,
-    final String? name,
-    final String? department,
-    final String? bio,
-    final Role? role,
-    final List<String>? skills,
-    final String? researchInterests,
-    final bool? isActive,
-  }) = _$UserImpl;
+  const factory _User(
+      {required final int id,
+      required final String email,
+      final String? name,
+      final String? department,
+      final String? bio,
+      final Role? role,
+      final List<String>? skills,
+      final String? researchInterests,
+      final bool? isActive}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
