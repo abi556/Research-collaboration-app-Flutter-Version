@@ -26,6 +26,7 @@ void main() {
       startDate: '2024-03-01',
       endDate: '2024-08-31',
       deadline: '2024-02-15',
+      professorId: 123, // Add a valid professorId here
     );
 
     test('should create a project successfully', () async {
@@ -61,4 +62,4 @@ void main() {
       // with an empty title throws an AssertionError
     }, skip: 'Validation is not implemented in the Project class');
   });
-} 
+}
