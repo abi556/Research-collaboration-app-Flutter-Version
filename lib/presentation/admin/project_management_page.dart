@@ -34,7 +34,7 @@ class ProjectManagementPage extends StatelessWidget {
                         const Text(
                           'Collabrix',
                           style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold),
+                              fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blueAccent),
                         ),
                       ],
                     ),
@@ -157,7 +157,7 @@ class ProjectManagementPage extends StatelessWidget {
                                 label: const Text('Active'),
                                 backgroundColor: Colors.green[100])),
                             const DataCell(ElevatedButton(
-                                onPressed: null, child: Text('Suspend'))),
+                                onPressed: null, child: Text('Deactivate'))),
                           ]),
                           DataRow(cells: [
                             const DataCell(SizedBox(
@@ -171,7 +171,7 @@ class ProjectManagementPage extends StatelessWidget {
                                 label: const Text('Active'),
                                 backgroundColor: Colors.green[100])),
                             const DataCell(ElevatedButton(
-                                onPressed: null, child: Text('Suspend'))),
+                                onPressed: null, child: Text('Deactivate'))),
                           ]),
                           DataRow(cells: [
                             const DataCell(SizedBox(
@@ -184,7 +184,7 @@ class ProjectManagementPage extends StatelessWidget {
                                 label: const Text('Pending'),
                                 backgroundColor: Colors.yellow[100])),
                             const DataCell(ElevatedButton(
-                                onPressed: null, child: Text('Suspend'))),
+                                onPressed: null, child: Text('Deactivate'))),
                           ]),
                           DataRow(cells: [
                             const DataCell(SizedBox(
@@ -197,7 +197,7 @@ class ProjectManagementPage extends StatelessWidget {
                                 label: const Text('Open'),
                                 backgroundColor: Colors.blue[100])),
                             const DataCell(ElevatedButton(
-                                onPressed: null, child: Text('Suspend'))),
+                                onPressed: null, child: Text('Deactivate'))),
                           ]),
                           DataRow(cells: [
                             const DataCell(SizedBox(
@@ -211,7 +211,7 @@ class ProjectManagementPage extends StatelessWidget {
                                 label: const Text('Completed'),
                                 backgroundColor: Colors.grey[300])),
                             const DataCell(ElevatedButton(
-                                onPressed: null, child: Text('Suspend'))),
+                                onPressed: null, child: Text('Deactivate'))),
                           ]),
                         ],
                       ),
