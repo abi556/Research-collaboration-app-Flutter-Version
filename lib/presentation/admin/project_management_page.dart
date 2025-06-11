@@ -6,9 +6,10 @@ class ProjectManagementPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Project Management'),
-      ),
+      /* AppBar is not visible in the provided image */
+      // appBar: AppBar(
+      //   title: const Text('Project Management'),
+      // ),
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -145,56 +146,72 @@ class ProjectManagementPage extends StatelessWidget {
                         ],
                         rows: [
                           DataRow(cells: [
-                            DataCell(SizedBox(
+                            const DataCell(SizedBox(
                                 width: 150,
-                                child: Text(
-                                    'Machine Learning For Climate Data'))),
+                                child:
+                                    Text('Machine Learning For Climate Data'))),
                             const DataCell(Text('Dr. Smith')),
                             const DataCell(Text('Computer Science')),
                             const DataCell(Text('3/5')),
-                            DataCell(Chip(label: const Text('Active'), backgroundColor: Colors.green[100])),
-                            const DataCell(ElevatedButton(onPressed: null, child: Text('Suspend'))),
+                            DataCell(Chip(
+                                label: const Text('Active'),
+                                backgroundColor: Colors.green[100])),
+                            const DataCell(ElevatedButton(
+                                onPressed: null, child: Text('Suspend'))),
                           ]),
                           DataRow(cells: [
-                            DataCell(SizedBox(
+                            const DataCell(SizedBox(
                                 width: 150,
                                 child: Text(
                                     'Neural Network for Image Recognition'))),
                             const DataCell(Text('Dr. Abreham')),
                             const DataCell(Text('Software Engineering')),
                             const DataCell(Text('4/4')),
-                            DataCell(Chip(label: const Text('Active'), backgroundColor: Colors.green[100])),
-                            const DataCell(ElevatedButton(onPressed: null, child: Text('Suspend'))),
+                            DataCell(Chip(
+                                label: const Text('Active'),
+                                backgroundColor: Colors.green[100])),
+                            const DataCell(ElevatedButton(
+                                onPressed: null, child: Text('Suspend'))),
                           ]),
                           DataRow(cells: [
-                            DataCell(SizedBox(
+                            const DataCell(SizedBox(
                                 width: 150,
                                 child: Text('Quantum Computing Algorithms'))),
                             const DataCell(Text('Ms. Hana')),
                             const DataCell(Text('Physics')),
                             const DataCell(Text('0/5')),
-                            DataCell(Chip(label: const Text('Pending'), backgroundColor: Colors.yellow[100])),
-                            const DataCell(ElevatedButton(onPressed: null, child: Text('Suspend'))),
+                            DataCell(Chip(
+                                label: const Text('Pending'),
+                                backgroundColor: Colors.yellow[100])),
+                            const DataCell(ElevatedButton(
+                                onPressed: null, child: Text('Suspend'))),
                           ]),
                           DataRow(cells: [
-                            DataCell(SizedBox(
+                            const DataCell(SizedBox(
                                 width: 150,
                                 child: Text('AI In Health Diagnostics'))),
                             const DataCell(Text('Prof. Welde')),
                             const DataCell(Text('Medical Research')),
                             const DataCell(Text('0/6')),
-                            DataCell(Chip(label: const Text('Open'), backgroundColor: Colors.blue[100])),
-                            const DataCell(ElevatedButton(onPressed: null, child: Text('Suspend'))),
+                            DataCell(Chip(
+                                label: const Text('Open'),
+                                backgroundColor: Colors.blue[100])),
+                            const DataCell(ElevatedButton(
+                                onPressed: null, child: Text('Suspend'))),
                           ]),
                           DataRow(cells: [
-                            DataCell(SizedBox(
+                            const DataCell(SizedBox(
                                 width: 150,
-                                child: Text('Data Mining for Social Media Analysis'))),
+                                child: Text(
+                                    'Data Mining for Social Media Analysis'))),
                             const DataCell(Text('Dr. Hiwot')),
                             const DataCell(Text('Information System')),
                             const DataCell(Text('5/5')),
-                            DataCell(Chip(label: const Text('Completed'), backgroundColor: Colors.grey[300])),
-                            const DataCell(ElevatedButton(onPressed: null, child: Text('Suspend'))),
+                            DataCell(Chip(
+                                label: const Text('Completed'),
+                                backgroundColor: Colors.grey[300])),
+                            const DataCell(ElevatedButton(
+                                onPressed: null, child: Text('Suspend'))),
                           ]),
                         ],
                       ),
@@ -214,9 +231,9 @@ class ProjectManagementPage extends StatelessWidget {
       padding: const EdgeInsets.only(right: 8.0),
       child: ChoiceChip(
         label: Text(text),
-        selected: text == 'All Projects', // This should be dynamic based on selected tab
+        selected: text == 'All Projects', // Handles selection state for the tab
         onSelected: (bool selected) {},
       ),
     );
   }
-} 
+}
