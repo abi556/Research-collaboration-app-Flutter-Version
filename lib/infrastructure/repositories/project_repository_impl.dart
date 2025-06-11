@@ -4,6 +4,7 @@ import '../../domain/entities/project.dart';
 import '../../domain/repositories/project_repository.dart';
 import '../dto/project_dto.dart';
 import '../../core/error/failures.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProjectRepositoryImpl implements ProjectRepository {
   final Dio _dio = ApiClient.dio;
@@ -34,9 +35,23 @@ class ProjectRepositoryImpl implements ProjectRepository {
   Future<Project> createProject(Project project) async {
     try {
       final dto = ProjectDtoX.fromDomain(project);
-      final response = await _dio.post('/projects', data: dto.toJson());
+      print('Creating project payload: \\${dto.toJson()}');
+      // Get token from SharedPreferences
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('access_token');
+      final response = await _dio.post(
+        '/projects',
+        data: dto.toJson(),
+        options: Options(
+          headers: {
+            if (token != null) 'Authorization': 'Bearer $token',
+          },
+        ),
+      );
+      print('Create project response: \\${response.data}');
       return ProjectDto.fromJson(response.data).toDomain();
     } on DioException catch (e) {
+      print('Create project DioException: \\${e.response?.data}');
       throw ServerFailure(e.message ?? 'Server error');
     }
   }

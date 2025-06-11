@@ -6,7 +6,7 @@ part 'project.g.dart';
 @freezed
 class Project with _$Project {
   const factory Project({
-    required int id,
+    int? id,
     required String title,
     required String description,
     required List<String> requirements,

@@ -20,7 +20,7 @@ ProjectDto _$ProjectDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ProjectDto {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   List<String> get requirements => throw _privateConstructorUsedError;
@@ -45,7 +45,7 @@ abstract class $ProjectDtoCopyWith<$Res> {
       _$ProjectDtoCopyWithImpl<$Res, ProjectDto>;
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       String title,
       String description,
       List<String> requirements,
@@ -69,7 +69,7 @@ class _$ProjectDtoCopyWithImpl<$Res, $Val extends ProjectDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? title = null,
     Object? description = null,
     Object? requirements = null,
@@ -78,10 +78,10 @@ class _$ProjectDtoCopyWithImpl<$Res, $Val extends ProjectDto>
     Object? deadline = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -119,7 +119,7 @@ abstract class _$$ProjectDtoImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       String title,
       String description,
       List<String> requirements,
@@ -141,7 +141,7 @@ class __$$ProjectDtoImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? title = null,
     Object? description = null,
     Object? requirements = null,
@@ -150,10 +150,10 @@ class __$$ProjectDtoImplCopyWithImpl<$Res>
     Object? deadline = null,
   }) {
     return _then(_$ProjectDtoImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -186,7 +186,7 @@ class __$$ProjectDtoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProjectDtoImpl implements _ProjectDto {
   const _$ProjectDtoImpl(
-      {required this.id,
+      {this.id,
       required this.title,
       required this.description,
       required final List<String> requirements,
@@ -199,7 +199,7 @@ class _$ProjectDtoImpl implements _ProjectDto {
       _$$ProjectDtoImplFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
   final String title;
   @override
@@ -272,7 +272,7 @@ class _$ProjectDtoImpl implements _ProjectDto {
 
 abstract class _ProjectDto implements ProjectDto {
   const factory _ProjectDto(
-      {required final int id,
+      {final int? id,
       required final String title,
       required final String description,
       required final List<String> requirements,
@@ -284,7 +284,7 @@ abstract class _ProjectDto implements ProjectDto {
       _$ProjectDtoImpl.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
   String get title;
   @override

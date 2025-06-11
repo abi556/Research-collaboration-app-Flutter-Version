@@ -7,7 +7,7 @@ part 'project_dto.g.dart';
 @freezed
 class ProjectDto with _$ProjectDto {
   const factory ProjectDto({
-    required int id,
+    int? id,
     required String title,
     required String description,
     required List<String> requirements,

@@ -48,7 +48,7 @@ class AuthService {
         return User(
           id: decoded['sub'].toString(),
           email: decoded['email'],
-          name: null,
+          name: decoded['name'],
           role: decoded['role'],
           profilePicture: null,
           createdAt: DateTime.now(),
@@ -88,7 +88,7 @@ class AuthService {
         return User(
           id: decoded['sub'].toString(),
           email: decoded['email'],
-          name: null,
+          name: decoded['name'],
           role: decoded['role'],
           profilePicture: null,
           createdAt: DateTime.now(),
@@ -155,7 +155,7 @@ class AuthService {
       return User(
         id: decoded['sub'].toString(),
         email: decoded['email'],
-        name: null,
+        name: decoded['name'],
         role: decoded['role'],
         profilePicture: null,
         createdAt: DateTime.now(),
