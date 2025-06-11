@@ -42,5 +42,63 @@ void main() {
       expect(() => useCase(3, 2), throwsA(isA<Exception>()));
       verify(mockRepository.applyForProject(3, 2)).called(1);
     });
+
+    test('should throw exception for invalid project ID', () async {
+      when(mockRepository.applyForProject(-1, 2))
+          .thenThrow(Exception('Invalid project ID'));
+
+      expect(() => useCase(-1, 2), throwsA(isA<Exception>()));
+      verify(mockRepository.applyForProject(-1, 2)).called(1);
+    });
+
+    test('should throw exception for invalid student ID', () async {
+      when(mockRepository.applyForProject(3, -1))
+          .thenThrow(Exception('Invalid student ID'));
+
+      expect(() => useCase(3, -1), throwsA(isA<Exception>()));
+      verify(mockRepository.applyForProject(3, -1)).called(1);
+    });
+
+    test('should throw exception for duplicate application', () async {
+      when(mockRepository.applyForProject(3, 2))
+          .thenThrow(Exception('Duplicate application'));
+
+      expect(() => useCase(3, 2), throwsA(isA<Exception>()));
+      verify(mockRepository.applyForProject(3, 2)).called(1);
+    });
+
+    test('should handle application with APPROVED status', () async {
+      const approvedApplication = Application(
+        id: 2,
+        studentId: 2,
+        projectId: 3,
+        status: ApplicationStatus.APPROVED,
+      );
+      when(mockRepository.applyForProject(3, 2))
+          .thenAnswer((_) async => approvedApplication);
+
+      final result = await useCase(3, 2);
+
+      expect(result.status, ApplicationStatus.APPROVED);
+      expect(result, equals(approvedApplication));
+      verify(mockRepository.applyForProject(3, 2)).called(1);
+    });
+
+    test('should handle application with REJECTED status', () async {
+      const rejectedApplication = Application(
+        id: 3,
+        studentId: 2,
+        projectId: 3,
+        status: ApplicationStatus.REJECTED,
+      );
+      when(mockRepository.applyForProject(3, 2))
+          .thenAnswer((_) async => rejectedApplication);
+
+      final result = await useCase(3, 2);
+
+      expect(result.status, ApplicationStatus.REJECTED);
+      expect(result, equals(rejectedApplication));
+      verify(mockRepository.applyForProject(3, 2)).called(1);
+    });
   });
-} 
+}
