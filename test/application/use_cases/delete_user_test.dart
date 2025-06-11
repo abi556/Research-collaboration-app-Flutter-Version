@@ -18,18 +18,59 @@ void main() {
 
   group('DeleteUser Use Case Tests', () {
     test('should delete a user successfully', () async {
-      when(mockRepository.deleteUser(1)).thenAnswer((_) async {});
+      // Arrange
+      const userId = 1;
+      when(mockRepository.deleteUser(userId)).thenAnswer((_) async {});
 
-      await useCase(1);
+      // Act
+      await useCase(userId);
 
-      verify(mockRepository.deleteUser(1)).called(1);
+      // Assert
+      verify(mockRepository.deleteUser(userId)).called(1);
     });
 
     test('should throw exception when repository fails', () async {
-      when(mockRepository.deleteUser(1)).thenThrow(Exception('Failed to delete user'));
+      // Arrange
+      const userId = 1;
+      when(mockRepository.deleteUser(userId))
+          .thenThrow(Exception('Failed to delete user'));
 
-      expect(() => useCase(1), throwsA(isA<Exception>()));
-      verify(mockRepository.deleteUser(1)).called(1);
+      // Act & Assert
+      expect(() => useCase(userId), throwsA(isA<Exception>()));
+      verify(mockRepository.deleteUser(userId)).called(1);
+    });
+
+    test('should throw exception when user ID is invalid', () async {
+      // Arrange
+      const invalidUserId = -1;
+      when(mockRepository.deleteUser(invalidUserId))
+          .thenThrow(Exception('Invalid user ID'));
+
+      // Act & Assert
+      expect(() => useCase(invalidUserId), throwsA(isA<Exception>()));
+      verify(mockRepository.deleteUser(invalidUserId)).called(1);
+    });
+
+    test('should throw exception when user does not exist', () async {
+      // Arrange
+      const nonExistentUserId = 999;
+      when(mockRepository.deleteUser(nonExistentUserId))
+          .thenThrow(Exception('User not found'));
+
+      // Act & Assert
+      expect(() => useCase(nonExistentUserId), throwsA(isA<Exception>()));
+      verify(mockRepository.deleteUser(nonExistentUserId)).called(1);
+    });
+
+    test('should handle null user ID gracefully', () async {
+      // Arrange
+      const nullUserId = 0;
+      when(mockRepository.deleteUser(nullUserId))
+          .thenThrow(Exception('User ID cannot be null'));
+
+      // Act & Assert
+      expect(() => useCase(nullUserId), throwsA(isA<Exception>()));
+      verify(mockRepository.deleteUser(nullUserId)).called(1);
     });
   });
 } 
