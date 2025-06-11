@@ -250,7 +250,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'I'm a Software Engineering student with a focus on machine learning and data science. I'm passionate about using technology to solve real-world problems and am looking for research opportunities to apply my skills.',
+                      'I am a Software Engineering student with a focus on machine learning and data science. I am passionate about using technology to solve real-world problems and am looking for research opportunities to apply my skills.',
                       style: GoogleFonts.inter(
                         fontSize: 14,
                         color: Colors.black87,
