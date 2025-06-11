@@ -62,5 +62,64 @@ void main() {
 
       expect(fromJson, equals(user));
     });
+
+    test('should create a copy of User with modified fields', () {
+      const user = User(
+        id: 1,
+        email: 'test@example.com',
+        name: 'Test User',
+        department: 'Computer Science',
+      );
+
+      final modifiedUser = user.copyWith(
+        name: 'Updated Name',
+        department: 'Updated Department',
+        role: Role.PROFESSOR,
+      );
+
+      expect(modifiedUser.id, equals(1));
+      expect(modifiedUser.email, equals('test@example.com'));
+      expect(modifiedUser.name, equals('Updated Name'));
+      expect(modifiedUser.department, equals('Updated Department'));
+      expect(modifiedUser.role, equals(Role.PROFESSOR));
+      expect(modifiedUser.bio, isNull);
+      expect(modifiedUser.skills, isNull);
+      expect(modifiedUser.researchInterests, isNull);
+      expect(modifiedUser.isActive, isNull);
+    });
+
+    test('should handle empty skills list', () {
+      const user = User(
+        id: 1,
+        email: 'test@example.com',
+        skills: [],
+      );
+
+      expect(user.skills, isEmpty);
+    });
+
+    test('should handle different Role values', () {
+      const student = User(
+        id: 1,
+        email: 'student@example.com',
+        role: Role.STUDENT,
+      );
+
+      const professor = User(
+        id: 2,
+        email: 'professor@example.com',
+        role: Role.PROFESSOR,
+      );
+
+      const admin = User(
+        id: 3,
+        email: 'admin@example.com',
+        role: Role.ADMIN,
+      );
+
+      expect(student.role, equals(Role.STUDENT));
+      expect(professor.role, equals(Role.PROFESSOR));
+      expect(admin.role, equals(Role.ADMIN));
+    });
   });
 } 

@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:research_collaboration_app/features/auth/domain/entities/user.dart';
 import 'package:research_collaboration_app/features/auth/presentation/providers/auth_provider.dart';
+import 'package:research_collaboration_app/features/auth/presentation/pages/login_page.dart';
+import 'package:research_collaboration_app/features/auth/presentation/pages/signup_page.dart';
 import 'package:research_collaboration_app/test/helpers/test_helpers.dart';
 
 void main() {
