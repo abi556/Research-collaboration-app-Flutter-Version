@@ -13,6 +13,18 @@ class AuthService {
     required this.prefs,
   });
 
+  // Manual JWT decode function
+  Map<String, dynamic> decodeJwt(String token) {
+    final parts = token.split('.');
+    if (parts.length != 3) {
+      throw Exception('Invalid token');
+    }
+    final payload = parts[1];
+    final normalized = base64Url.normalize(payload);
+    final decoded = utf8.decode(base64Url.decode(normalized));
+    return json.decode(decoded);
+  }
+
   Future<User> login(String email, String password, [String? name]) async {
     try {
       final response = await dio.post(
@@ -26,25 +38,22 @@ class AuthService {
 
       if (response.statusCode == 200) {
         final data = response.data;
-        // Store tokens
-        await prefs.setString('access_token', data['access_token']);
+        final accessToken = data['access_token'];
+        await prefs.setString('access_token', accessToken);
         await prefs.setString('refresh_token', data['refresh_token']);
-        
-        // Get user data
-        final userResponse = await dio.get(
-          '/auth/me',
-          options: Options(
-            headers: {
-              'Authorization': 'Bearer ${data['access_token']}',
-            },
-          ),
-        );
 
-        if (userResponse.statusCode == 200) {
-          return User.fromJson(userResponse.data);
-        } else {
-          throw ServerException(message: userResponse.data['message']);
-        }
+        // Decode JWT to get user info
+        Map<String, dynamic> decoded = decodeJwt(accessToken);
+        print('Decoded JWT in login: $decoded');
+        return User(
+          id: decoded['sub'].toString(),
+          email: decoded['email'],
+          name: null,
+          role: decoded['role'],
+          profilePicture: null,
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        );
       } else {
         throw ServerException(message: response.data['message']);
       }
@@ -69,25 +78,22 @@ class AuthService {
 
       if (response.statusCode == 201) {
         final data = response.data;
-        // Store tokens
-        await prefs.setString('access_token', data['access_token']);
+        final accessToken = data['access_token'];
+        await prefs.setString('access_token', accessToken);
         await prefs.setString('refresh_token', data['refresh_token']);
-        
-        // Get user data
-        final userResponse = await dio.get(
-          '/auth/me',
-          options: Options(
-            headers: {
-              'Authorization': 'Bearer ${data['access_token']}',
-            },
-          ),
-        );
 
-        if (userResponse.statusCode == 200) {
-          return User.fromJson(userResponse.data);
-        } else {
-          throw ServerException(message: userResponse.data['message']);
-        }
+        // Decode JWT to get user info
+        Map<String, dynamic> decoded = decodeJwt(accessToken);
+        print('Decoded JWT in signup: $decoded');
+        return User(
+          id: decoded['sub'].toString(),
+          email: decoded['email'],
+          name: null,
+          role: decoded['role'],
+          profilePicture: null,
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        );
       } else {
         throw ServerException(message: response.data['message']);
       }
@@ -141,65 +147,22 @@ class AuthService {
   }
 
   Future<User?> getCurrentUser() async {
+    final accessToken = prefs.getString('access_token');
+    if (accessToken == null) return null;
     try {
-      final accessToken = prefs.getString('access_token');
-      if (accessToken == null) return null;
-
-      final response = await dio.get(
-        '/auth/me',
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $accessToken',
-          },
-        ),
+      Map<String, dynamic> decoded = decodeJwt(accessToken);
+      print('Decoded JWT in getCurrentUser: $decoded');
+      return User(
+        id: decoded['sub'].toString(),
+        email: decoded['email'],
+        name: null,
+        role: decoded['role'],
+        profilePicture: null,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
       );
-
-      if (response.statusCode == 200) {
-        return User.fromJson(response.data);
-      } else if (response.statusCode == 401) {
-        // Try to refresh token
-        final refreshToken = prefs.getString('refresh_token');
-        if (refreshToken == null) return null;
-
-        final refreshResponse = await dio.post(
-          '/auth/refresh',
-          options: Options(
-            headers: {
-              'Authorization': 'Bearer $refreshToken',
-            },
-          ),
-        );
-
-        if (refreshResponse.statusCode == 200) {
-          final data = refreshResponse.data;
-          await prefs.setString('access_token', data['access_token']);
-          await prefs.setString('refresh_token', data['refresh_token']);
-
-          // Retry getting user data with new token
-          final userResponse = await dio.get(
-            '/auth/me',
-            options: Options(
-              headers: {
-                'Authorization': 'Bearer ${data['access_token']}',
-              },
-            ),
-          );
-
-          if (userResponse.statusCode == 200) {
-            return User.fromJson(userResponse.data);
-          }
-        }
-        return null;
-      } else {
-        throw ServerException(message: response.data['message']);
-      }
-    } on DioException catch (e) {
-      if (e.response?.statusCode == 401) {
-        return null;
-      }
-      throw ServerException(message: e.response?.data['message'] ?? e.message);
     } catch (e) {
-      throw ServerException(message: e.toString());
+      return null;
     }
   }
 } 

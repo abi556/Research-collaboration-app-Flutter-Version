@@ -26,6 +26,51 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
   UserRole _selectedRole = UserRole.student;
   bool _obscurePassword = true;
   bool _obscureConfirmPassword = true;
+  late final ProviderSubscription<AuthState> _authListener;
+
+  @override
+  void initState() {
+    super.initState();
+    _authListener = ref.listenManual<AuthState>(authProvider, (previous, next) {
+      print('SignupScreen: AuthState changed from: previous: $previous, next: $next');
+      next.maybeWhen(
+        authenticated: (user) {
+          print('SignupScreen: Authenticated as role: ${user.role}');
+          final role = user.role;
+          print('Navigating to dashboard for role: $role');
+          Future.microtask(() {
+            switch (role.toLowerCase()) {
+              case 'student':
+                widget.onSignupSuccess(role);
+                break;
+              case 'professor':
+                widget.onSignupSuccess(role);
+                break;
+              case 'admin':
+                widget.onSignupSuccess(role);
+                break;
+              default:
+                print('Unknown role: $role, defaulting to professor dashboard');
+                widget.onSignupSuccess('professor');
+            }
+          });
+        },
+        error: (message) {
+          String displayMessage;
+          if (message is List) {
+            displayMessage = (message as List).join('\n');
+          } else {
+            displayMessage = message.toString();
+          }
+          print('SignupScreen: Error: $displayMessage');
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(displayMessage)),
+          );
+        },
+        orElse: () {},
+      );
+    });
+  }
 
   @override
   void dispose() {
@@ -33,6 +78,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
+    _authListener.close();
     super.dispose();
   }
 
@@ -54,9 +100,28 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     ref.listen<AuthState>(authProvider, (previous, next) {
+      print('SignupScreen: AuthState changed from: previous: $previous, next: $next');
       next.maybeWhen(
         authenticated: (user) {
-          widget.onSignupSuccess(user.role);
+          print('SignupScreen: Authenticated as role: ${user.role}');
+          final role = user.role;
+          print('Navigating to dashboard for role: $role');
+          Future.microtask(() {
+            switch (role.toLowerCase()) {
+              case 'student':
+                widget.onSignupSuccess(role);
+                break;
+              case 'professor':
+                widget.onSignupSuccess(role);
+                break;
+              case 'admin':
+                widget.onSignupSuccess(role);
+                break;
+              default:
+                print('Unknown role: $role, defaulting to professor dashboard');
+                widget.onSignupSuccess('professor');
+            }
+          });
         },
         error: (message) {
           String displayMessage;
@@ -65,6 +130,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
           } else {
             displayMessage = message.toString();
           }
+          print('SignupScreen: Error: $displayMessage');
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(displayMessage)),
           );

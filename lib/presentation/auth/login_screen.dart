@@ -27,6 +27,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   bool _obscurePassword = true;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
@@ -44,9 +49,28 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     ref.listen<AuthState>(authProvider, (previous, next) {
+      print('LoginScreen: AuthState changed from: previous: $previous, next: $next');
       next.maybeWhen(
         authenticated: (user) {
-          widget.onLoginSuccess(user.role);
+          print('LoginScreen: Authenticated as role: ${user.role}');
+          final role = user.role;
+          print('Navigating to dashboard for role: $role');
+          Future.microtask(() {
+            switch (role.toLowerCase()) {
+              case 'student':
+                widget.onLoginSuccess(role);
+                break;
+              case 'professor':
+                widget.onLoginSuccess(role);
+                break;
+              case 'admin':
+                widget.onLoginSuccess(role);
+                break;
+              default:
+                print('Unknown role: $role, defaulting to professor dashboard');
+                widget.onLoginSuccess('professor');
+            }
+          });
         },
         error: (message) {
           String displayMessage;
@@ -55,6 +79,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           } else {
             displayMessage = message.toString();
           }
+          print('LoginScreen: Error: $displayMessage');
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(displayMessage)),
           );
