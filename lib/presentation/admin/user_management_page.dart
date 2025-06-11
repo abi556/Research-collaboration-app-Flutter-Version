@@ -12,7 +12,7 @@ class UserManagementPage extends StatelessWidget {
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Sidebar
+          /* Navigation Sidebar */
           Card(
             margin: const EdgeInsets.all(20.0),
             elevation: 4,
@@ -33,7 +33,7 @@ class UserManagementPage extends StatelessWidget {
                         const Text(
                           'Collabrix',
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
+                              fontSize: 22, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -52,7 +52,7 @@ class UserManagementPage extends StatelessWidget {
               ),
             ),
           ),
-          // Main Content
+          /* Main Content Area */
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
@@ -60,11 +60,11 @@ class UserManagementPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'User Management',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    'User Management Overview',
+                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                   ),
                   const Text(
-                    'Manage Users and their permissions',
+                    'Manage users and their associated permissions within the system.',
                     style: TextStyle(fontSize: 16, color: Colors.grey),
                   ),
                   const SizedBox(height: 20),
@@ -73,7 +73,7 @@ class UserManagementPage extends StatelessWidget {
                       Expanded(
                         child: TextField(
                           decoration: InputDecoration(
-                            hintText: 'Search users...',
+                            hintText: 'Search for users...',
                             prefixIcon: const Icon(Icons.search),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.0),
@@ -210,7 +210,7 @@ class UserManagementPage extends StatelessWidget {
       child: ChoiceChip(
         label: Text(text),
         selected:
-            text == 'All Users', // This should be dynamic based on selected tab
+            text == 'All Users', // Handles selection state for the tab
         onSelected: (bool selected) {},
       ),
     );
