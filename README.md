@@ -15,7 +15,7 @@ Welcome to the **Research Collaboration App**! This platform streamlines researc
 ## 🚀 <span style="color:#388E3C">Features</span>
 
 ### 1️⃣ 🗂️ <span style="color:#F57C00">Research Project Management</span> (CRUD)
-- **Create:** Professors can post new research projects.
+- **Create:** Professors can post or create new research projects.
 - **Read:** Students can browse and view available projects.
 - **Update:** Professors can update project details (description, requirements, deadlines).
 - **Delete:** Admins can remove inactive or outdated projects.
