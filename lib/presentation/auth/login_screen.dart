@@ -7,7 +7,14 @@ enum UserRole { student, professor, admin }
 
 class LoginScreen extends ConsumerStatefulWidget {
   final VoidCallback onSignUp;
-  const LoginScreen({super.key, required this.onSignUp});
+  final VoidCallback onForgotPassword;
+  final void Function(String role) onLoginSuccess;
+  const LoginScreen({
+    super.key,
+    required this.onSignUp,
+    required this.onForgotPassword,
+    required this.onLoginSuccess,
+  });
 
   @override
   ConsumerState<LoginScreen> createState() => _LoginScreenState();
@@ -39,10 +46,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     ref.listen<AuthState>(authProvider, (previous, next) {
       next.maybeWhen(
         authenticated: (user) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Login successful!')),
-          );
-          // TODO: Navigate to dashboard or home screen
+          widget.onLoginSuccess(user.role);
         },
         error: (message) {
           String displayMessage;
@@ -194,75 +198,35 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/forgot-password');
-                    },
+                    onPressed: widget.onForgotPassword,
                     child: Text(
                       'Forgot Password?',
-                      style: GoogleFonts.inter(color: primaryColor, fontSize: 14),
+                      style: GoogleFonts.inter(color: primaryColor),
                     ),
                   ),
                 ),
+                const SizedBox(height: 24),
                 // Login button
                 SizedBox(
                   width: double.infinity,
                   height: 56,
                   child: ElevatedButton(
-                    onPressed: authState.maybeWhen(
-                      loading: () => null,
-                      orElse: () => _login,
-                    ),
+                    onPressed: _login,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
                     ),
-                    child: authState.maybeWhen(
-                      loading: () => const SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
-                      ),
-                      orElse: () => Text('Login', style: GoogleFonts.inter(fontSize: 18)),
-                    ),
-                  ),
-                ),
-                authState.maybeWhen(
-                  error: (message) => Padding(
-                    padding: const EdgeInsets.only(top: 16.0),
                     child: Text(
-                      message,
+                      'Login',
                       style: GoogleFonts.inter(
-                        color: Colors.red,
-                        fontSize: 15,
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
-                      textAlign: TextAlign.center,
                     ),
                   ),
-                  orElse: () => const SizedBox.shrink(),
-                ),
-                const SizedBox(height: 16),
-                // Sign up option
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Don't have an account? ",
-                      style: GoogleFonts.inter(color: Colors.grey, fontSize: 16),
-                    ),
-                    TextButton(
-                      onPressed: widget.onSignUp,
-                      child: Text(
-                        'Sign Up',
-                        style: GoogleFonts.inter(
-                          color: primaryColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
               ],
             ),

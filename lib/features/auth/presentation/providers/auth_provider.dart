@@ -1,7 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../domain/entities/user.dart';
 import '../../domain/repositories/auth_repository.dart';
+import '../../data/services/auth_service.dart';
+import '../../data/repositories/auth_repository_impl.dart';
 
 part 'auth_provider.freezed.dart';
 
@@ -67,11 +71,30 @@ class AuthNotifier extends StateNotifier<AuthState> {
   }
 }
 
-final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
-  final authRepository = ref.watch(authRepositoryProvider);
-  return AuthNotifier(authRepository);
+// Provider for Dio
+final dioProvider = Provider<Dio>((ref) => Dio(BaseOptions(baseUrl: 'http://10.0.2.2:3000')));
+
+// Provider for SharedPreferences (async)
+final sharedPreferencesProvider = FutureProvider<SharedPreferences>((ref) async {
+  return await SharedPreferences.getInstance();
+});
+
+// Provider for AuthService
+final authServiceProvider = Provider<AuthService>((ref) {
+  final dio = ref.watch(dioProvider);
+  final prefs = ref.watch(sharedPreferencesProvider).maybeWhen(
+    data: (prefs) => prefs,
+    orElse: () => throw Exception('SharedPreferences not ready'),
+  );
+  return AuthService(dio: dio, prefs: prefs);
 });
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
-  throw UnimplementedError('AuthRepository provider must be overridden');
+  final authService = ref.watch(authServiceProvider);
+  return AuthRepositoryImpl(authService: authService);
+});
+
+final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
+  final authRepository = ref.watch(authRepositoryProvider);
+  return AuthNotifier(authRepository);
 }); 

@@ -27,47 +27,19 @@ final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     initialLocation: AppRoutes.splash,
     redirect: (context, state) {
+      // Only protect dashboard routes
+      final isAuthenticated = authState.maybeWhen(
+        authenticated: (_) => true,
+        orElse: () => false,
+      );
       final dashboardRoutes = [
         AppRoutes.studentDashboard,
         AppRoutes.professorDashboard,
         AppRoutes.adminDashboard,
       ];
-
-      // Wait for auth state to finish loading before redirecting
-      final isLoading = authState.maybeWhen(
-        loading: () => true,
-        orElse: () => false,
-      );
-      if (isLoading) {
-        // Stay on splash while loading
-        if (state.matchedLocation != AppRoutes.splash) {
-          return AppRoutes.splash;
-        }
-        return null;
-      }
-
-      final user = authState.maybeWhen(authenticated: (u) => u, orElse: () => null);
-      if (user != null) {
-        // If on splash, login, signup, or forgot password, go to dashboard
-        if ([AppRoutes.splash, AppRoutes.login, AppRoutes.signup, AppRoutes.forgotPassword].contains(state.matchedLocation)) {
-          switch (user.role.toLowerCase()) {
-            case 'student':
-              return AppRoutes.studentDashboard;
-            case 'professor':
-              return AppRoutes.professorDashboard;
-            case 'admin':
-              return AppRoutes.adminDashboard;
-          }
-        }
-      }
-
-      // If not authenticated and trying to access dashboard, redirect to login
-      final isAuthenticated = user != null;
       if (!isAuthenticated && dashboardRoutes.contains(state.matchedLocation)) {
         return AppRoutes.login;
       }
-
-      // Do not redirect for loading, initial, or error states
       return null;
     },
     routes: [
@@ -83,14 +55,42 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => LoginScreen(
           onSignUp: () => context.go(AppRoutes.signup),
           onForgotPassword: () => context.go(AppRoutes.forgotPassword),
-          onLoginSuccess: (role) {}, // Navigation handled by redirect
+          onLoginSuccess: (role) {
+            switch (role.toLowerCase()) {
+              case 'student':
+                context.go(AppRoutes.studentDashboard);
+                break;
+              case 'professor':
+                context.go(AppRoutes.professorDashboard);
+                break;
+              case 'admin':
+                context.go(AppRoutes.adminDashboard);
+                break;
+              default:
+                context.go(AppRoutes.login);
+            }
+          },
         ),
       ),
       GoRoute(
         path: AppRoutes.signup,
         builder: (context, state) => SignupScreen(
           onLogin: () => context.go(AppRoutes.login),
-          onSignupSuccess: (role) {}, // Navigation handled by redirect
+          onSignupSuccess: (role) {
+            switch (role.toLowerCase()) {
+              case 'student':
+                context.go(AppRoutes.studentDashboard);
+                break;
+              case 'professor':
+                context.go(AppRoutes.professorDashboard);
+                break;
+              case 'admin':
+                context.go(AppRoutes.adminDashboard);
+                break;
+              default:
+                context.go(AppRoutes.login);
+            }
+          },
         ),
       ),
       GoRoute(

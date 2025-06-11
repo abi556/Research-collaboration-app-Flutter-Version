@@ -7,7 +7,12 @@ enum UserRole { student, professor, admin }
 
 class SignupScreen extends ConsumerStatefulWidget {
   final VoidCallback onLogin;
-  const SignupScreen({super.key, required this.onLogin});
+  final void Function(String role) onSignupSuccess;
+  const SignupScreen({
+    super.key,
+    required this.onLogin,
+    required this.onSignupSuccess,
+  });
 
   @override
   ConsumerState<SignupScreen> createState() => _SignupScreenState();
@@ -51,10 +56,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
     ref.listen<AuthState>(authProvider, (previous, next) {
       next.maybeWhen(
         authenticated: (user) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Signup successful!')),
-          );
-          // TODO: Navigate to dashboard or home screen
+          widget.onSignupSuccess(user.role);
         },
         error: (message) {
           String displayMessage;
@@ -214,7 +216,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 // Role selection
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [UserRole.student, UserRole.professor].map((role) {
+                  children: UserRole.values.map((role) {
                     final isSelected = _selectedRole == role;
                     return Expanded(
                       child: Padding(
@@ -244,23 +246,20 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   width: double.infinity,
                   height: 56,
                   child: ElevatedButton(
-                    onPressed: authState.maybeWhen(
-                      loading: () => null,
-                      orElse: () => _signup,
-                    ),
+                    onPressed: _signup,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
                     ),
-                    child: authState.maybeWhen(
-                      loading: () => const SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                    child: Text(
+                      'Sign Up',
+                      style: GoogleFonts.inter(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
-                      orElse: () => Text('Sign Up', style: GoogleFonts.inter(fontSize: 18)),
                     ),
                   ),
                 ),
