@@ -100,5 +100,69 @@ void main() {
       expect(result, equals(rejectedApplication));
       verify(mockRepository.applyForProject(3, 2)).called(1);
     });
+
+    test('should handle zero project ID', () async {
+      when(mockRepository.applyForProject(0, 2))
+          .thenThrow(Exception('Invalid project ID'));
+
+      expect(() => useCase(0, 2), throwsA(isA<Exception>()));
+      verify(mockRepository.applyForProject(0, 2)).called(1);
+    });
+
+    test('should handle zero student ID', () async {
+      when(mockRepository.applyForProject(3, 0))
+          .thenThrow(Exception('Invalid student ID'));
+
+      expect(() => useCase(3, 0), throwsA(isA<Exception>()));
+      verify(mockRepository.applyForProject(3, 0)).called(1);
+    });
+
+    test('should handle network timeout', () async {
+      when(mockRepository.applyForProject(3, 2))
+          .thenThrow(Exception('Network timeout'));
+
+      expect(() => useCase(3, 2), throwsA(isA<Exception>()));
+      verify(mockRepository.applyForProject(3, 2)).called(1);
+    });
+
+    test('should handle server error', () async {
+      when(mockRepository.applyForProject(3, 2))
+          .thenThrow(Exception('Server error'));
+
+      expect(() => useCase(3, 2), throwsA(isA<Exception>()));
+      verify(mockRepository.applyForProject(3, 2)).called(1);
+    });
+
+    test('should handle maximum integer values', () async {
+      const maxIntApplication = Application(
+        id: 9223372036854775807,
+        studentId: 9223372036854775807,
+        projectId: 9223372036854775807,
+        status: ApplicationStatus.PENDING,
+      );
+      when(mockRepository.applyForProject(9223372036854775807, 9223372036854775807))
+          .thenAnswer((_) async => maxIntApplication);
+
+      final result = await useCase(9223372036854775807, 9223372036854775807);
+
+      expect(result, equals(maxIntApplication));
+      verify(mockRepository.applyForProject(9223372036854775807, 9223372036854775807)).called(1);
+    });
+
+    test('should handle application with same IDs', () async {
+      const sameIdApplication = Application(
+        id: 1,
+        studentId: 1,
+        projectId: 1,
+        status: ApplicationStatus.PENDING,
+      );
+      when(mockRepository.applyForProject(1, 1))
+          .thenAnswer((_) async => sameIdApplication);
+
+      final result = await useCase(1, 1);
+
+      expect(result, equals(sameIdApplication));
+      verify(mockRepository.applyForProject(1, 1)).called(1);
+    });
   });
 }
