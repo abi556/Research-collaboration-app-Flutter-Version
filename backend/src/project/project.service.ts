@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ForbiddenException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateProjectDto } from './dto';
 import { UpdateProjectDto } from './dto';
@@ -8,9 +12,10 @@ export class ProjectService {
     constructor(private readonly prisma: PrismaService) { }
 
     async create(createProjectDto: CreateProjectDto, professorId: number) {
+        const { id, professor, ...rest } = createProjectDto as any;
         return this.prisma.project.create({
             data: {
-                ...createProjectDto,
+                ...rest,
                 professorId,
             },
         });

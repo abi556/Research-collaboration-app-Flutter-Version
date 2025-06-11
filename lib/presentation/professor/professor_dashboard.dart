@@ -1,184 +1,173 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:research_collaboration_app/features/auth/domain/entities/user.dart';
+import 'package:research_collaboration_app/features/auth/presentation/providers/auth_provider.dart';
+import 'package:research_collaboration_app/presentation/professor/widgets/professor_drawer.dart';
+import 'package:research_collaboration_app/presentation/professor/professor_create_project_screen.dart';
 
 class ProfessorDashboard extends ConsumerWidget {
-  const ProfessorDashboard({super.key});
+  const ProfessorDashboard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final authState = ref.watch(authProvider);
+    return authState.maybeWhen(
+      authenticated: (user) => _buildDashboard(context, user),
+      orElse: () => const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      ),
+    );
+  }
+
+  Widget _buildDashboard(BuildContext context, User user) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Professor Dashboard'),
+        backgroundColor: Colors.white,
+        elevation: 1,
+        iconTheme: const IconThemeData(color: Colors.black),
+        titleSpacing: 0,
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+            color: Colors.black,
+          ),
+        ),
+        title: Row(
+          children: [
+            Image.asset('assets/images/collabrix_logo.png', height: 32, width: 32, errorBuilder: (_, __, ___) => const Icon(Icons.science)),
+            const SizedBox(width: 8),
+            const Text('Collabrix', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+          ],
+        ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {
-              // TODO: Implement logout
-            },
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.black12),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(6.0),
+                child: Icon(Icons.science, color: Colors.black, size: 24),
+              ),
+            ),
           ),
         ],
       ),
+      drawer: ProfessorDrawer(user: user),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Welcome Section
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Welcome, Professor!',
-                      style: Theme.of(context).textTheme.headlineSmall,
+            const Text('Dashboard', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            const SizedBox(height: 4),
+            Text('Welcome back, Dr ${user.name ?? ''}', style: const TextStyle(fontSize: 15)),
+            const SizedBox(height: 12),
+            SizedBox(
+              width: 160,
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  elevation: 0,
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                ),
+                icon: const Icon(Icons.add, size: 18),
+                label: const Text('New Project', style: TextStyle(fontWeight: FontWeight.bold)),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const ProfessorCreateProjectScreen(),
                     ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Manage your research projects and student applications',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
             ),
-            const SizedBox(height: 24),
-
-            // Quick Stats Section
-            Text(
-              'Quick Stats',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                Expanded(
-                  child: _StatCard(
-                    title: 'Active Projects',
-                    value: '0',
-                    icon: Icons.work,
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: _StatCard(
-                    title: 'Pending Applications',
-                    value: '0',
-                    icon: Icons.pending_actions,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 24),
-
-            // My Projects Section
-            Text(
-              'My Projects',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const SizedBox(height: 16),
-            _PlaceholderList(
-              itemCount: 3,
-              itemBuilder: (context, index) => Card(
-                child: ListTile(
-                  title: Text('Research Project ${index + 1}'),
-                  subtitle: Text('${index + 2} Applications'),
-                  trailing: const Icon(Icons.arrow_forward_ios),
-                  onTap: () {
-                    // TODO: Navigate to project details
-                  },
-                ),
+            const SizedBox(height: 18),
+            // Stat cards stacked vertically
+            Center(
+              child: Column(
+                children: [
+                  _buildStatCard('Active Projects', '2'),
+                  const SizedBox(height: 16),
+                  _buildStatCard('Student Applications', '5'),
+                  const SizedBox(height: 16),
+                  _buildStatCard('Total Students', '7'),
+                ],
               ),
             ),
-            const SizedBox(height: 24),
-
-            // Recent Applications Section
-            Text(
-              'Recent Applications',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const SizedBox(height: 16),
-            _PlaceholderList(
-              itemCount: 3,
-              itemBuilder: (context, index) => Card(
-                child: ListTile(
-                  title: Text('Student ${index + 1}'),
-                  subtitle: Text('Project ${index + 1}'),
-                  trailing: const Icon(Icons.arrow_forward_ios),
-                  onTap: () {
-                    // TODO: Navigate to application details
-                  },
-                ),
-              ),
-            ),
+            const SizedBox(height: 22),
+            const Text('Your Research Projects', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+            const SizedBox(height: 8),
+            _buildProjectCard('Machine Learning for climate Data', 'Analysing climate patterns using machine learning algorithms to predict future trends'),
+            _buildProjectCard('Neural Networks for Image Recognition', 'Developing advanced neural networks for improved image recognition capabilities'),
+            _buildProjectCard('Quantum Computing Algorithms', 'Developing new algorithms for quantum computers to solve complex problems'),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // TODO: Navigate to create project
-        },
-        child: const Icon(Icons.add),
+    );
+  }
+
+  Widget _buildStatCard(String label, String value) {
+    return Container(
+      width: 380, // or MediaQuery.of(context).size.width * 0.95 for responsiveness
+      constraints: const BoxConstraints(maxWidth: 500),
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        elevation: 1,
+        margin: EdgeInsets.zero,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 18),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(label, style: const TextStyle(fontSize: 16, color: Colors.black87, fontWeight: FontWeight.w500)),
+              const SizedBox(height: 6),
+              Text(value, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            ],
+          ),
+        ),
       ),
     );
   }
-}
 
-class _StatCard extends StatelessWidget {
-  final String title;
-  final String value;
-  final IconData icon;
-
-  const _StatCard({
-    required this.title,
-    required this.value,
-    required this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildProjectCard(String title, String description) {
     return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 1,
+      margin: const EdgeInsets.only(bottom: 12),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(icon, size: 24),
-            const SizedBox(height: 8),
-            Text(
-              value,
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
             const SizedBox(height: 4),
-            Text(
-              title,
-              style: Theme.of(context).textTheme.bodyMedium,
+            Text(description, style: const TextStyle(color: Colors.black87, fontSize: 13)),
+            const SizedBox(height: 12),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.black,
+                  side: const BorderSide(color: Colors.black),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                ),
+                onPressed: () {
+                  // TODO: Navigate to project details
+                },
+                child: const Text('View Details', style: TextStyle(fontWeight: FontWeight.bold)),
+              ),
             ),
           ],
         ),
       ),
-    );
-  }
-}
-
-class _PlaceholderList extends StatelessWidget {
-  final int itemCount;
-  final Widget Function(BuildContext, int) itemBuilder;
-
-  const _PlaceholderList({
-    required this.itemCount,
-    required this.itemBuilder,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.separated(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: itemCount,
-      separatorBuilder: (context, index) => const SizedBox(height: 8),
-      itemBuilder: itemBuilder,
     );
   }
 } 
