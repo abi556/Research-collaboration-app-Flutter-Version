@@ -12,10 +12,22 @@ class ProjectRepositoryImpl implements ProjectRepository {
   @override
   Future<List<Project>> getAllProjects() async {
     try {
-      final response = await _dio.get('/projects');
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('access_token');
+      print('getAllProjects: token = $token');
+      final response = await _dio.get(
+        '/projects',
+        options: Options(
+          headers: {
+            if (token != null) 'Authorization': 'Bearer $token',
+          },
+        ),
+      );
+      print('getAllProjects: response = \\${response.data}');
       final List data = response.data as List;
       return data.map((json) => ProjectDto.fromJson(json).toDomain()).toList();
     } on DioException catch (e) {
+      print('getAllProjects DioException: \\${e.response?.data}');
       throw ServerFailure(e.message ?? 'Server error');
     }
   }

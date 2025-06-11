@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../application/providers/project_providers.dart';
 import '../../domain/entities/project.dart';
 import '../../core/error/failures.dart';
+import 'package:research_collaboration_app/features/professor/dashboard/providers/dashboard_providers.dart';
 
 class ProfessorCreateProjectScreen extends ConsumerStatefulWidget {
   const ProfessorCreateProjectScreen({Key? key}) : super(key: key);
@@ -77,8 +78,10 @@ class _ProfessorCreateProjectScreenState extends ConsumerState<ProfessorCreatePr
         startDate: _startDate!.toUtc().toIso8601String(),
         endDate: _endDate!.toUtc().toIso8601String(),
         deadline: _deadline!.toUtc().toIso8601String(),
+        professorId: 1, // TODO: Replace with actual professorId
       );
       await ref.read(createProjectProvider).call(project);
+      ref.invalidate(professorProjectsProvider);
       if (mounted) {
         Navigator.of(context).pop(true); // Optionally pass true for success
       }

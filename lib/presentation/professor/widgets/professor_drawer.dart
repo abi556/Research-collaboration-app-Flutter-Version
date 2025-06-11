@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:research_collaboration_app/core/routing/app_router.dart';
 import 'package:research_collaboration_app/features/auth/domain/entities/user.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:research_collaboration_app/features/auth/presentation/providers/auth_provider.dart';
 
-class ProfessorDrawer extends StatelessWidget {
+class ProfessorDrawer extends ConsumerWidget {
   final User user;
 
   const ProfessorDrawer({
@@ -12,7 +14,7 @@ class ProfessorDrawer extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // Get current route to highlight active item
     final String currentRoute = GoRouterState.of(context).matchedLocation;
     return Drawer(
@@ -73,9 +75,10 @@ class ProfessorDrawer extends StatelessWidget {
                 contentPadding: EdgeInsets.zero,
                 leading: const Icon(Icons.logout, color: Colors.black),
                 title: const Text('Logout', style: TextStyle(color: Colors.black)),
-                onTap: () {
-                  // TODO: Implement logout functionality
-                  context.go(AppRoutes.login);
+                onTap: () async {
+                  // Terminate session and navigate to splash screen
+                  await ref.read(authProvider.notifier).logout();
+                  context.go('/');
                 },
               ),
             ],

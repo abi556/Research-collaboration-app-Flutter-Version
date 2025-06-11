@@ -41,121 +41,104 @@ class _BrowseResearchesState extends State<BrowseResearches> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Browse Researches',
-          style: GoogleFonts.inter(
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
+        backgroundColor: Colors.white,
+        elevation: 1,
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.menu, color: Colors.black),
+            onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
-        centerTitle: true,
+        title: Row(
+          children: [
+            Image.asset('assets/images/collabrix_logo.png', height: 32, width: 32, errorBuilder: (_, __, ___) => const Icon(Icons.science)),
+            const SizedBox(width: 8),
+            const Text('Collabrix', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+          ],
+        ),
       ),
-      body: Column(
-        children: [
-          // Search Bar
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Browse Researches', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+            const SizedBox(height: 12),
+            TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Search researches...',
+                hintText: 'Search Projects',
                 prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
-                fillColor: Colors.grey[200],
-                contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                fillColor: Colors.grey[100],
+                contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
               ),
-              onChanged: (value) {
-                // TODO: Implement search functionality
-                setState(() {});
-              },
             ),
-          ),
-          // Research List
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              itemCount: _researches.length,
-              itemBuilder: (context, index) {
-                final research = _researches[index];
-                return Card(
-                  margin: const EdgeInsets.only(bottom: 16.0),
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          research['title'],
-                          style: GoogleFonts.inter(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Row(
-                          children: [
-                            const Icon(Icons.person, size: 16, color: Colors.grey),
-                            const SizedBox(width: 4),
-                            Text(
-                              research['author'],
-                              style: GoogleFonts.inter(
-                                color: Colors.grey[600],
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 4),
-                        Row(
-                          children: [
-                            const Icon(Icons.business, size: 16, color: Colors.grey),
-                            const SizedBox(width: 4),
-                            Text(
-                              research['department'],
-                              style: GoogleFonts.inter(
-                                color: Colors.grey[600],
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: research['status'] == 'Ongoing'
-                                ? Colors.blue[100]
-                                : Colors.green[100],
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Text(
-                            research['status'],
-                            style: GoogleFonts.inter(
-                              color: research['status'] == 'Ongoing'
-                                  ? Colors.blue[700]
-                                  : Colors.green[700],
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
+            const SizedBox(height: 16),
+            _ResearchCard(
+              title: 'AI in Healthcare Diagnostics',
+              professor: 'Dr. Prof. Weide',
+              status: 'Open',
+              description: 'Using artificial intelligence to improve early disease detection and diagnosis.',
             ),
-          ),
-        ],
+            const SizedBox(height: 12),
+            _ResearchCard(
+              title: 'Neural Networks for Image Recognition',
+              professor: 'Dr. Abreham',
+              status: 'Open',
+              description: 'Developing advanced neural networks for improved image recognition capabilities..',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ResearchCard extends StatelessWidget {
+  final String title;
+  final String professor;
+  final String status;
+  final String description;
+  const _ResearchCard({required this.title, required this.professor, required this.status, required this.description});
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            const SizedBox(height: 4),
+            Text('Led By $professor', style: const TextStyle(color: Colors.black87)),
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              decoration: BoxDecoration(
+                color: Colors.green[100],
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(status, style: const TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
+            ),
+            const SizedBox(height: 8),
+            Text(description, style: const TextStyle(color: Colors.black87)),
+            const SizedBox(height: 8),
+            Align(
+              alignment: Alignment.centerRight,
+              child: OutlinedButton(
+                onPressed: () {},
+                child: const Text('Apply Now'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

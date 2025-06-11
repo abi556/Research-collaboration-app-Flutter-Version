@@ -3,6 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:research_collaboration_app/features/auth/domain/entities/user.dart';
 import 'package:research_collaboration_app/features/auth/presentation/providers/auth_provider.dart';
 import 'package:research_collaboration_app/presentation/professor/widgets/professor_drawer.dart';
+import 'package:research_collaboration_app/features/auth/data/services/auth_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfessorProfileScreen extends ConsumerWidget {
   const ProfessorProfileScreen({Key? key}) : super(key: key);
@@ -70,7 +73,7 @@ class ProfessorProfileScreen extends ConsumerWidget {
                       child: Icon(Icons.person, size: 48, color: Colors.grey[600]),
                     ),
                     const SizedBox(height: 12),
-                    Text(user.name ?? 'No Name', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    Text(user.name ?? '', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 4),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -114,8 +117,44 @@ class ProfessorProfileScreen extends ConsumerWidget {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                         elevation: 0,
                       ),
-                      onPressed: () {
-                        // TODO: Show delete confirmation dialog
+                      onPressed: () async {
+                        final shouldDelete = await showDialog<bool>(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text('Delete Account'),
+                            content: const Text('Are you sure you want to delete your account? This action cannot be undone.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.of(context).pop(false),
+                                child: const Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () => Navigator.of(context).pop(true),
+                                child: const Text('Delete', style: TextStyle(color: Colors.red)),
+                              ),
+                            ],
+                          ),
+                        );
+                        if (shouldDelete == true) {
+                          final scaffoldMessenger = ScaffoldMessenger.of(context);
+                          try {
+                            final container = ProviderScope.containerOf(context);
+                            final prefs = await SharedPreferences.getInstance();
+                            final authService = AuthService(
+                              dio: container.read(dioProvider),
+                              prefs: prefs,
+                            );
+                            await authService.deleteAccount();
+                            // Optionally, log out and navigate to splash screen
+                            container.read(authProvider.notifier).logout();
+                            // Use GoRouter to navigate to splash screen
+                            context.go('/');
+                          } catch (e) {
+                            scaffoldMessenger.showSnackBar(
+                              SnackBar(content: Text('Failed to delete account: $e')),
+                            );
+                          }
+                        }
                       },
                       child: const Text('Delete Account'),
                     ),

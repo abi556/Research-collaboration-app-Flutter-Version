@@ -4,6 +4,8 @@ import 'package:research_collaboration_app/features/auth/domain/entities/user.da
 import 'package:research_collaboration_app/features/auth/presentation/providers/auth_provider.dart';
 import 'package:research_collaboration_app/presentation/professor/widgets/professor_drawer.dart';
 import 'package:research_collaboration_app/presentation/professor/professor_create_project_screen.dart';
+import 'package:research_collaboration_app/features/professor/dashboard/providers/dashboard_providers.dart';
+import 'package:research_collaboration_app/core/error/failures.dart';
 
 class ProfessorDashboard extends ConsumerWidget {
   const ProfessorDashboard({Key? key}) : super(key: key);
@@ -12,14 +14,16 @@ class ProfessorDashboard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authProvider);
     return authState.maybeWhen(
-      authenticated: (user) => _buildDashboard(context, user),
+      authenticated: (user) => _buildDashboard(context, user, ref),
       orElse: () => const Scaffold(
         body: Center(child: CircularProgressIndicator()),
       ),
     );
   }
 
-  Widget _buildDashboard(BuildContext context, User user) {
+  Widget _buildDashboard(BuildContext context, User user, WidgetRef ref) {
+    final statsAsync = ref.watch(professorDashboardStatsProvider);
+    final projectsAsync = ref.watch(professorProjectsProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -64,7 +68,7 @@ class ProfessorDashboard extends ConsumerWidget {
           children: [
             const Text('Dashboard', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             const SizedBox(height: 4),
-            Text('Welcome back, Dr ${user.name ?? ''}', style: const TextStyle(fontSize: 15)),
+            Text('Welcome back, Professor ${user.name ?? ''}', style: const TextStyle(fontSize: 15)),
             const SizedBox(height: 12),
             SizedBox(
               width: 160,
@@ -89,24 +93,30 @@ class ProfessorDashboard extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 18),
-            // Stat cards stacked vertically
+            // Stat cards from provider
             Center(
               child: Column(
                 children: [
-                  _buildStatCard('Active Projects', '2'),
+                  _buildStatCard('Active Projects', '-'),
                   const SizedBox(height: 16),
-                  _buildStatCard('Student Applications', '5'),
+                  _buildStatCard('Student Applications', '-'),
                   const SizedBox(height: 16),
-                  _buildStatCard('Total Students', '7'),
+                  _buildStatCard('Total Students', '-'),
                 ],
               ),
             ),
             const SizedBox(height: 22),
             const Text('Your Research Projects', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
             const SizedBox(height: 8),
-            _buildProjectCard('Machine Learning for climate Data', 'Analysing climate patterns using machine learning algorithms to predict future trends'),
-            _buildProjectCard('Neural Networks for Image Recognition', 'Developing advanced neural networks for improved image recognition capabilities'),
-            _buildProjectCard('Quantum Computing Algorithms', 'Developing new algorithms for quantum computers to solve complex problems'),
+            projectsAsync.when(
+              data: (projects) => projects.isEmpty
+                  ? const Text('No projects yet.')
+                  : Column(
+                      children: projects.map((p) => _buildProjectCard(p.title, p.description)).toList(),
+                    ),
+              loading: () => const CircularProgressIndicator(),
+              error: (e, _) => Text('Error: \\${e is Failure ? e.message : e.toString()}'),
+            ),
           ],
         ),
       ),

@@ -14,6 +14,7 @@ class ProjectDto with _$ProjectDto {
     required String startDate,
     required String endDate,
     required String deadline,
+    required int professorId,
   }) = _ProjectDto;
 
   factory ProjectDto.fromJson(Map<String, dynamic> json) => _$ProjectDtoFromJson(json);
@@ -28,6 +29,7 @@ extension ProjectDtoX on ProjectDto {
     startDate: startDate,
     endDate: endDate,
     deadline: deadline,
+    professorId: professorId,
   );
 
   static ProjectDto fromDomain(Project project) => ProjectDto(
@@ -38,5 +40,6 @@ extension ProjectDtoX on ProjectDto {
     startDate: project.startDate,
     endDate: project.endDate,
     deadline: project.deadline,
+    professorId: project.professorId,
   );
 } 

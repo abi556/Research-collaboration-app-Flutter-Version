@@ -7,16 +7,17 @@ part of 'user.dart';
 // **************************************************************************
 
 _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
-  id: (json['id'] as num).toInt(),
-  email: json['email'] as String,
-  name: json['name'] as String?,
-  department: json['department'] as String?,
-  bio: json['bio'] as String?,
-  role: $enumDecodeNullable(_$RoleEnumMap, json['role']),
-  skills: (json['skills'] as List<dynamic>?)?.map((e) => e as String).toList(),
-  researchInterests: json['researchInterests'] as String?,
-  isActive: json['isActive'] as bool?,
-);
+      id: (json['id'] as num).toInt(),
+      email: json['email'] as String,
+      name: json['name'] as String?,
+      department: json['department'] as String?,
+      bio: json['bio'] as String?,
+      role: $enumDecodeNullable(_$RoleEnumMap, json['role']),
+      skills:
+          (json['skills'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      researchInterests: json['researchInterests'] as String?,
+      isActive: json['isActive'] as bool?,
+    );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     <String, dynamic>{

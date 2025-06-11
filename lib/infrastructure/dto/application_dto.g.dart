@@ -15,13 +15,13 @@ _$ApplicationDtoImpl _$$ApplicationDtoImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$ApplicationDtoImplToJson(
-  _$ApplicationDtoImpl instance,
-) => <String, dynamic>{
-  'id': instance.id,
-  'studentId': instance.studentId,
-  'projectId': instance.projectId,
-  'status': _$ApplicationStatusEnumMap[instance.status]!,
-};
+        _$ApplicationDtoImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'studentId': instance.studentId,
+      'projectId': instance.projectId,
+      'status': _$ApplicationStatusEnumMap[instance.status]!,
+    };
 
 const _$ApplicationStatusEnumMap = {
   ApplicationStatus.PENDING: 'PENDING',

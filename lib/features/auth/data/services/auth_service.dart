@@ -150,19 +150,39 @@ class AuthService {
     final accessToken = prefs.getString('access_token');
     if (accessToken == null) return null;
     try {
-      Map<String, dynamic> decoded = decodeJwt(accessToken);
-      print('Decoded JWT in getCurrentUser: $decoded');
-      return User(
-        id: decoded['sub'].toString(),
-        email: decoded['email'],
-        name: decoded['name'],
-        role: decoded['role'],
-        profilePicture: null,
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
+      final response = await dio.get(
+        '/users/me',
+        options: Options(
+          headers: {'Authorization': 'Bearer $accessToken'},
+        ),
       );
+      if (response.statusCode == 200) {
+        return User.fromJson(response.data);
+      }
+      return null;
     } catch (e) {
       return null;
+    }
+  }
+
+  Future<void> deleteAccount() async {
+    final accessToken = prefs.getString('access_token');
+    if (accessToken == null) throw Exception('No access token');
+    try {
+      final response = await dio.delete(
+        '/users/me',
+        options: Options(
+          headers: {'Authorization': 'Bearer $accessToken'},
+        ),
+      );
+      if (response.statusCode != 200 && response.statusCode != 204) {
+        throw Exception('Failed to delete account');
+      }
+      // Optionally clear tokens
+      await prefs.remove('access_token');
+      await prefs.remove('refresh_token');
+    } catch (e) {
+      throw Exception('Failed to delete account: $e');
     }
   }
 } 

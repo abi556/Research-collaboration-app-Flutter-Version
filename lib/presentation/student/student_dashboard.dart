@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class StudentDashboard extends ConsumerWidget {
   const StudentDashboard({super.key});
@@ -8,16 +9,23 @@ class StudentDashboard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Student Dashboard'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {
-              // TODO: Implement logout
-            },
+        backgroundColor: Colors.white,
+        elevation: 1,
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.menu, color: Colors.black),
+            onPressed: () => Scaffold.of(context).openDrawer(),
           ),
-        ],
+        ),
+        title: Row(
+          children: [
+            Image.asset('assets/images/collabrix_logo.png', height: 32, width: 32, errorBuilder: (_, __, ___) => const Icon(Icons.science)),
+            const SizedBox(width: 8),
+            const Text('Collabrix', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+          ],
+        ),
       ),
+      drawer: const StudentDrawer(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -179,6 +187,85 @@ class _PlaceholderList extends StatelessWidget {
       itemCount: itemCount,
       separatorBuilder: (context, index) => const SizedBox(height: 8),
       itemBuilder: itemBuilder,
+    );
+  }
+}
+
+class StudentDrawer extends StatelessWidget {
+  const StudentDrawer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      backgroundColor: Colors.white,
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Image.asset('assets/images/collabrix_logo.png', height: 28, width: 28, errorBuilder: (_, __, ___) => const Icon(Icons.science)),
+                  const SizedBox(width: 8),
+                  const Text('Collabrix', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                  const Spacer(),
+                  IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 32),
+              _DrawerItem(label: 'Dashboard', onTap: () { context.go('/student/dashboard'); Navigator.of(context).pop(); }),
+              _DrawerItem(label: 'Browse Researches', onTap: () { context.go('/student/browse'); Navigator.of(context).pop(); }),
+              _DrawerItem(label: 'My Applications', onTap: () { context.go('/student/applications'); Navigator.of(context).pop(); }),
+              _DrawerItem(label: 'Profile', onTap: () { context.go('/student/profile'); Navigator.of(context).pop(); }),
+              const Spacer(),
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.logout, color: Colors.black),
+                title: const Text('Logout', style: TextStyle(color: Colors.black)),
+                onTap: () {
+                  // TODO: Implement logout
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _DrawerItem extends StatelessWidget {
+  final String label;
+  final VoidCallback onTap;
+  const _DrawerItem({required this.label, required this.onTap});
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Material(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(8),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(8),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            child: Text(
+              label,
+              style: const TextStyle(
+                fontWeight: FontWeight.normal,
+                color: Colors.black,
+                fontSize: 16,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 } 

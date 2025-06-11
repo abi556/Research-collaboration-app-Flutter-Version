@@ -18,9 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
         leading: Builder(
           builder: (context) => IconButton(
             icon: const Icon(Icons.menu, color: Colors.black),
-            onPressed: () {
-              // TODO: Implement drawer functionality
-            },
+            onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
         title: Row(

@@ -13,6 +13,7 @@ class Project with _$Project {
     required String startDate,
     required String endDate,
     required String deadline,
+    required int professorId,
   }) = _Project;
 
   factory Project.fromJson(Map<String, dynamic> json) => _$ProjectFromJson(json);

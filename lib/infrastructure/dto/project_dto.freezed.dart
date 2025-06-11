@@ -27,6 +27,7 @@ mixin _$ProjectDto {
   String get startDate => throw _privateConstructorUsedError;
   String get endDate => throw _privateConstructorUsedError;
   String get deadline => throw _privateConstructorUsedError;
+  int get professorId => throw _privateConstructorUsedError;
 
   /// Serializes this ProjectDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -51,7 +52,8 @@ abstract class $ProjectDtoCopyWith<$Res> {
       List<String> requirements,
       String startDate,
       String endDate,
-      String deadline});
+      String deadline,
+      int professorId});
 }
 
 /// @nodoc
@@ -76,6 +78,7 @@ class _$ProjectDtoCopyWithImpl<$Res, $Val extends ProjectDto>
     Object? startDate = null,
     Object? endDate = null,
     Object? deadline = null,
+    Object? professorId = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -106,6 +109,10 @@ class _$ProjectDtoCopyWithImpl<$Res, $Val extends ProjectDto>
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
               as String,
+      professorId: null == professorId
+          ? _value.professorId
+          : professorId // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -125,7 +132,8 @@ abstract class _$$ProjectDtoImplCopyWith<$Res>
       List<String> requirements,
       String startDate,
       String endDate,
-      String deadline});
+      String deadline,
+      int professorId});
 }
 
 /// @nodoc
@@ -148,6 +156,7 @@ class __$$ProjectDtoImplCopyWithImpl<$Res>
     Object? startDate = null,
     Object? endDate = null,
     Object? deadline = null,
+    Object? professorId = null,
   }) {
     return _then(_$ProjectDtoImpl(
       id: freezed == id
@@ -178,6 +187,10 @@ class __$$ProjectDtoImplCopyWithImpl<$Res>
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
               as String,
+      professorId: null == professorId
+          ? _value.professorId
+          : professorId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -192,7 +205,8 @@ class _$ProjectDtoImpl implements _ProjectDto {
       required final List<String> requirements,
       required this.startDate,
       required this.endDate,
-      required this.deadline})
+      required this.deadline,
+      required this.professorId})
       : _requirements = requirements;
 
   factory _$ProjectDtoImpl.fromJson(Map<String, dynamic> json) =>
@@ -218,10 +232,12 @@ class _$ProjectDtoImpl implements _ProjectDto {
   final String endDate;
   @override
   final String deadline;
+  @override
+  final int professorId;
 
   @override
   String toString() {
-    return 'ProjectDto(id: $id, title: $title, description: $description, requirements: $requirements, startDate: $startDate, endDate: $endDate, deadline: $deadline)';
+    return 'ProjectDto(id: $id, title: $title, description: $description, requirements: $requirements, startDate: $startDate, endDate: $endDate, deadline: $deadline, professorId: $professorId)';
   }
 
   @override
@@ -239,7 +255,9 @@ class _$ProjectDtoImpl implements _ProjectDto {
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.deadline, deadline) ||
-                other.deadline == deadline));
+                other.deadline == deadline) &&
+            (identical(other.professorId, professorId) ||
+                other.professorId == professorId));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -252,7 +270,8 @@ class _$ProjectDtoImpl implements _ProjectDto {
       const DeepCollectionEquality().hash(_requirements),
       startDate,
       endDate,
-      deadline);
+      deadline,
+      professorId);
 
   /// Create a copy of ProjectDto
   /// with the given fields replaced by the non-null parameter values.
@@ -278,7 +297,8 @@ abstract class _ProjectDto implements ProjectDto {
       required final List<String> requirements,
       required final String startDate,
       required final String endDate,
-      required final String deadline}) = _$ProjectDtoImpl;
+      required final String deadline,
+      required final int professorId}) = _$ProjectDtoImpl;
 
   factory _ProjectDto.fromJson(Map<String, dynamic> json) =
       _$ProjectDtoImpl.fromJson;
@@ -297,6 +317,8 @@ abstract class _ProjectDto implements ProjectDto {
   String get endDate;
   @override
   String get deadline;
+  @override
+  int get professorId;
 
   /// Create a copy of ProjectDto
   /// with the given fields replaced by the non-null parameter values.

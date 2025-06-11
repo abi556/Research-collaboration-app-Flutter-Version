@@ -8,16 +8,16 @@ part of 'project.dart';
 
 _$ProjectImpl _$$ProjectImplFromJson(Map<String, dynamic> json) =>
     _$ProjectImpl(
-      id: (json['id'] as num).toInt(),
+      id: (json['id'] as num?)?.toInt(),
       title: json['title'] as String,
       description: json['description'] as String,
-      requirements:
-          (json['requirements'] as List<dynamic>)
-              .map((e) => e as String)
-              .toList(),
+      requirements: (json['requirements'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
       startDate: json['startDate'] as String,
       endDate: json['endDate'] as String,
       deadline: json['deadline'] as String,
+      professorId: (json['professorId'] as num).toInt(),
     );
 
 Map<String, dynamic> _$$ProjectImplToJson(_$ProjectImpl instance) =>
@@ -29,4 +29,5 @@ Map<String, dynamic> _$$ProjectImplToJson(_$ProjectImpl instance) =>
       'startDate': instance.startDate,
       'endDate': instance.endDate,
       'deadline': instance.deadline,
+      'professorId': instance.professorId,
     };

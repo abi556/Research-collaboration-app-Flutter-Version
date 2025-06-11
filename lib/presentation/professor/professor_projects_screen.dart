@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:research_collaboration_app/features/auth/domain/entities/user.dart';
 import 'package:research_collaboration_app/features/auth/presentation/providers/auth_provider.dart';
 import 'package:research_collaboration_app/presentation/professor/widgets/professor_drawer.dart';
+import 'package:research_collaboration_app/features/professor/dashboard/providers/dashboard_providers.dart';
 
 class ProfessorProjectsScreen extends ConsumerWidget {
   const ProfessorProjectsScreen({Key? key}) : super(key: key);
@@ -33,32 +34,41 @@ class ProfessorProjectsScreen extends ConsumerWidget {
         ),
       ),
       drawer: ProfessorDrawer(user: user),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Search Bar
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Search project',
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
-                ),
-                filled: true,
-                fillColor: Colors.grey[100],
-                contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+      body: Consumer(
+        builder: (context, ref, _) {
+          final projectsAsync = ref.watch(professorProjectsProvider);
+          return projectsAsync.when(
+            data: (projects) => SingleChildScrollView(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Search Bar
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Search project',
+                      prefixIcon: const Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey[100],
+                      contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  // Project Cards
+                  if (projects.isEmpty)
+                    const Text('No projects yet.'),
+                  ...projects.map((p) => _buildProjectCard(p.title, p.description)).toList(),
+                ],
               ),
             ),
-            const SizedBox(height: 16),
-            // Project Cards
-            _buildProjectCard('Machine Learning for climate Data', 'Analysing climate patterns using machine learning algorithms to predict future trends'),
-            _buildProjectCard('Neural Networks for Image Recognition', 'Developing advanced neural networks for improved image recognition capabilities'),
-            _buildProjectCard('Quantum computing', 'Developing new algorithms for quantum computers to solve complex problems'),
-          ],
-        ),
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (e, _) => Center(child: Text('Error: $e')),
+          );
+        },
       ),
     );
   }

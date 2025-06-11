@@ -27,6 +27,7 @@ mixin _$Project {
   String get startDate => throw _privateConstructorUsedError;
   String get endDate => throw _privateConstructorUsedError;
   String get deadline => throw _privateConstructorUsedError;
+  int get professorId => throw _privateConstructorUsedError;
 
   /// Serializes this Project to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,7 +50,8 @@ abstract class $ProjectCopyWith<$Res> {
       List<String> requirements,
       String startDate,
       String endDate,
-      String deadline});
+      String deadline,
+      int professorId});
 }
 
 /// @nodoc
@@ -74,6 +76,7 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
     Object? startDate = null,
     Object? endDate = null,
     Object? deadline = null,
+    Object? professorId = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -104,6 +107,10 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
               as String,
+      professorId: null == professorId
+          ? _value.professorId
+          : professorId // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -122,7 +129,8 @@ abstract class _$$ProjectImplCopyWith<$Res> implements $ProjectCopyWith<$Res> {
       List<String> requirements,
       String startDate,
       String endDate,
-      String deadline});
+      String deadline,
+      int professorId});
 }
 
 /// @nodoc
@@ -145,6 +153,7 @@ class __$$ProjectImplCopyWithImpl<$Res>
     Object? startDate = null,
     Object? endDate = null,
     Object? deadline = null,
+    Object? professorId = null,
   }) {
     return _then(_$ProjectImpl(
       id: freezed == id
@@ -175,6 +184,10 @@ class __$$ProjectImplCopyWithImpl<$Res>
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
               as String,
+      professorId: null == professorId
+          ? _value.professorId
+          : professorId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -189,7 +202,8 @@ class _$ProjectImpl implements _Project {
       required final List<String> requirements,
       required this.startDate,
       required this.endDate,
-      required this.deadline})
+      required this.deadline,
+      required this.professorId})
       : _requirements = requirements;
 
   factory _$ProjectImpl.fromJson(Map<String, dynamic> json) =>
@@ -215,10 +229,12 @@ class _$ProjectImpl implements _Project {
   final String endDate;
   @override
   final String deadline;
+  @override
+  final int professorId;
 
   @override
   String toString() {
-    return 'Project(id: $id, title: $title, description: $description, requirements: $requirements, startDate: $startDate, endDate: $endDate, deadline: $deadline)';
+    return 'Project(id: $id, title: $title, description: $description, requirements: $requirements, startDate: $startDate, endDate: $endDate, deadline: $deadline, professorId: $professorId)';
   }
 
   @override
@@ -236,7 +252,9 @@ class _$ProjectImpl implements _Project {
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.deadline, deadline) ||
-                other.deadline == deadline));
+                other.deadline == deadline) &&
+            (identical(other.professorId, professorId) ||
+                other.professorId == professorId));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -249,7 +267,8 @@ class _$ProjectImpl implements _Project {
       const DeepCollectionEquality().hash(_requirements),
       startDate,
       endDate,
-      deadline);
+      deadline,
+      professorId);
 
   /// Create a copy of Project
   /// with the given fields replaced by the non-null parameter values.
@@ -275,7 +294,8 @@ abstract class _Project implements Project {
       required final List<String> requirements,
       required final String startDate,
       required final String endDate,
-      required final String deadline}) = _$ProjectImpl;
+      required final String deadline,
+      required final int professorId}) = _$ProjectImpl;
 
   factory _Project.fromJson(Map<String, dynamic> json) = _$ProjectImpl.fromJson;
 
@@ -293,6 +313,8 @@ abstract class _Project implements Project {
   String get endDate;
   @override
   String get deadline;
+  @override
+  int get professorId;
 
   /// Create a copy of Project
   /// with the given fields replaced by the non-null parameter values.
